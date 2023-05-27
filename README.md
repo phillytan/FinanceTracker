@@ -32,6 +32,8 @@ Some additional functionalities we may add include a forex and crypto tracker, t
   - Adding the transactions
 
 ## Prototypes
-[Untitled (Draft) 2.pdf](https://github.com/chin9/FinanceTracker/files/11581003/Untitled.Draft.2.pdf)
+###Dashboard Prototype
+![Dashboard_Prototype](https://github.com/chin9/FinanceTracker/assets/55860881/3a87d7ae-697c-4ec8-9778-ede283df9a2b)
 
+###Transactions Page Prototype
 ![IMG_48B14423E544-1](https://github.com/chin9/FinanceTracker/assets/64379928/d860dcb9-eb36-4895-93c5-fda14a384530)
