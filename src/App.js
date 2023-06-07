@@ -1,7 +1,19 @@
-import { Button } from '@mui/material'
+import { Button, Container } from '@mui/material'
+import NavBar from './components/NavBar';
+import TransactionsTable from './components/TransactionsTable';
 
 function App() {
-  return <Button variant="contained">Hello World</Button>;
+  return (
+		<>
+			<NavBar />
+			<Container>
+        <br />
+        <TransactionsTable />
+        <br />
+				<Button variant="contained">Hello World</Button>
+			</Container>
+		</>
+	);
 }
 
 export default App;
