@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { Button, Container } from '@mui/material'
+import NavBar from './components/NavBar';
+import TransactionsTable from './components/TransactionsTable';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+		<>
+			<NavBar />
+			<Container>
+        <br />
+        <TransactionsTable />
+        <br />
+				<Button variant="contained">Hello World</Button>
+			</Container>
+		</>
+	);
 }
 
 export default App;
