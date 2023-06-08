@@ -10,7 +10,7 @@ function App() {
         <br />
         <TransactionsTable />
         <br />
-				<Button variant="contained">Hello World</Button>
+				<Button variant="contained">Hello World!</Button>
 			</Container>
 		</>
 	);
