@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 
 function createData(
   date, type, name, currency, amount
@@ -20,6 +21,9 @@ const rows = [
 
 const TransactionsTable = () => {
   return (
+	<>
+		<h2>Transactions</h2>
+		<Button variant="contained">Add Entry</Button>
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
 				<TableHead>
@@ -49,6 +53,8 @@ const TransactionsTable = () => {
 				</TableBody>
 			</Table>
 		</TableContainer>
+		<Button variant="contained">Delete Selected Entry</Button>
+	</>
 	);
 }
 

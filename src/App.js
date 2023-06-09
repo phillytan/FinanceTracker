@@ -1,4 +1,4 @@
-import { Button, Container } from '@mui/material'
+import { Container } from '@mui/material'
 import NavBar from './components/NavBar';
 import TransactionsTable from './components/TransactionsTable';
 
@@ -10,7 +10,6 @@ function App() {
         <br />
         <TransactionsTable />
         <br />
-				<Button variant="contained">Hello World!</Button>
 			</Container>
 		</>
 	);

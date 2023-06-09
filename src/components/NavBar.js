@@ -21,7 +21,7 @@ const NavBar = () => {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-						Finance Tracker
+						Finance Forecaster
 					</Typography>
 					<Button color="inherit">Login</Button>
 				</Toolbar>
