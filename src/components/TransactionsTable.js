@@ -7,6 +7,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+import TransactionItem from './TransactionsItem';
+
 function createData(
   date, type, name, currency, amount
 ) {
@@ -28,6 +30,7 @@ const TransactionsTable = () => {
 						<TableCell>Type</TableCell>
 						<TableCell>Merchant Name</TableCell>
 						<TableCell align="right">Amount</TableCell>
+						<TableCell ></TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -44,6 +47,7 @@ const TransactionsTable = () => {
 							<TableCell align="right">
 								{`${row.currency} ${row.amount}`}
 							</TableCell>
+							<TableCell><TransactionItem item={row}></TransactionItem></TableCell>
 						</TableRow>
 					))}
 				</TableBody>
