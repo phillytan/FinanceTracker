@@ -2,8 +2,6 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -30,13 +28,16 @@ export default function LoginPage() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          backgroundColor: "#f7f7f7",
+          padding: 8,
         }}
       >
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Typography component="h1" variant="h4">
+          Log In
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 4 }}>
           <TextField
+            size='small'
             margin="normal"
             required
             fullWidth
@@ -47,6 +48,7 @@ export default function LoginPage() {
             autoFocus
           />
           <TextField
+            size='small'
             margin="normal"
             required
             fullWidth
@@ -56,25 +58,27 @@ export default function LoginPage() {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mb: 2, mt: 3 }}
             color="primary"
           >
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link variant="body2">Forgot password?</Link>
-            </Grid>
-            <Grid item>
-              <Link href="/signup" variant="body2">
+            <Grid
+              item
+              xs={12}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography>Not a member yet?</Typography>
+              <Link href="/signup" variant="body1" ml={1}>
                 {"Sign Up"}
               </Link>
             </Grid>
