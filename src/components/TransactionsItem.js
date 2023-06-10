@@ -10,6 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 // https://mui.com/material-ui/react-dialog/
 
+import UpdateTransactionItem from './UpdateTransactionItem';
 
 /**
  * Styling for dialog box
@@ -21,7 +22,7 @@ const dialogTheme = {
 
     '& .MuiDialogActions-root': {
         padding: '15px',
-        'margin-top':'5px'
+        'margin-top': '5px'
     },
     '& .MuiDialog-paper': {
         "min-width": "60%",
@@ -137,9 +138,10 @@ const TransactionsItemButton = (props) => {
 
                 <DialogActions>
                     {/* todo: implement update action */}
-                    <Button autoFocus>
+                    {/* <Button autoFocus>
                         Update
-                    </Button>
+                    </Button> */}
+                    <UpdateTransactionItem item={props.item} />
                     {/* todo: implement delete action. */}
                     <Button autoFocus onClick={handleDelete}>
                         Delete

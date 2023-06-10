@@ -1,15 +1,19 @@
 import { Button, Container } from '@mui/material'
 import NavBar from './components/NavBar';
 import TransactionsTable from './components/TransactionsTable';
+import AddTransactionItem from './components/AddTransactionItem';
 
 function App() {
-  return (
+	return (
 		<>
 			<NavBar />
 			<Container>
-        <br />
-        <TransactionsTable />
-        <br />
+				<br />
+				<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+					<AddTransactionItem />
+				</div>
+				<TransactionsTable />
+				<br />
 				<Button variant="contained">Hello World</Button>
 			</Container>
 		</>
