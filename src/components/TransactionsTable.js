@@ -6,7 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
+
+import TransactionItem from './TransactionsItem';
 
 function createData(
   date, type, name, currency, amount
@@ -23,7 +24,6 @@ const TransactionsTable = () => {
   return (
 	<>
 		<h2>Transactions</h2>
-		<Button variant="contained">Add Entry</Button>
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
 				<TableHead>
@@ -32,6 +32,7 @@ const TransactionsTable = () => {
 						<TableCell>Type</TableCell>
 						<TableCell>Merchant Name</TableCell>
 						<TableCell align="right">Amount</TableCell>
+						<TableCell ></TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -48,12 +49,12 @@ const TransactionsTable = () => {
 							<TableCell align="right">
 								{`${row.currency} ${row.amount}`}
 							</TableCell>
+							<TableCell><TransactionItem item={row}></TransactionItem></TableCell>
 						</TableRow>
 					))}
 				</TableBody>
 			</Table>
 		</TableContainer>
-		<Button variant="contained">Delete Selected Entry</Button>
 	</>
 	);
 }
