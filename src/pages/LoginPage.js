@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { Divider } from "@mui/material";
 
 // https://github.com/mui/material-ui/blob/v5.13.4/docs/data/material/getting-started/templates/sign-in/SignIn.js
 export default function LoginPage() {
@@ -67,6 +68,7 @@ export default function LoginPage() {
           >
             Sign In
           </Button>
+          <Divider sx={{ mb: 1 }}/>
           <Grid container>
             <Grid
               item
