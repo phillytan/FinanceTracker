@@ -71,7 +71,6 @@ function IndexPage() {
           </CardContent>
         </Card>
         <br />
-				<Button variant="contained">Hello World</Button>
 			</Container>
 		</>
 	);

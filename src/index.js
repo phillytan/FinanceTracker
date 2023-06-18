@@ -11,6 +11,8 @@ import "@fontsource/roboto/700.css";
 import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import DashBoardPage from "./pages/DashBoardPage";
+
 import NavBar from "./components/NavBar";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -22,6 +24,7 @@ root.render(
 				<NavBar />
 				<Routes>
 					<Route path={"/"} element={<IndexPage />} />
+					<Route path={"/dashboard"} element={<DashBoardPage />} />
 					<Route path={"/login"} element={<LoginPage />} />
 					<Route path={"/signup"} element={<SignupPage />} />
 				</Routes>
