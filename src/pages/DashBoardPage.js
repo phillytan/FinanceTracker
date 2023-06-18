@@ -1,6 +1,7 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
 import DashboardBarChart from "../components/DashboardGraphs/BarChart";
+import DashboardLineChart from "../components/DashboardGraphs/LineChart";
 
 /**
  * Component for the dashboard page
@@ -60,6 +61,7 @@ export default function DashBoardPage() {
       }}
     >
       <DashboardBarChart title="Title Here" data={sampleData} />
+      <DashboardLineChart title="Title Here" data={sampleData} dataKey="pv"/>
     </Container>
   );
 }
