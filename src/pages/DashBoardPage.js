@@ -3,6 +3,7 @@ import Container from "@mui/material/Container";
 import DashboardBarChart from "../components/DashboardGraphs/BarChart";
 import DashboardLineChart from "../components/DashboardGraphs/LineChart";
 import DashboardPieChart from "../components/DashboardGraphs/PieChart";
+import DashboardStackedBarChart from "../components/DashboardGraphs/StackedBarChart";
 
 /**
  * Component for the dashboard page
@@ -61,6 +62,15 @@ export default function DashBoardPage() {
     { name: 'Group E', value: 278 },
   ];
 
+  const sampleStackedData = [
+    { date: '6/13', Grocery: 44, Transportation: 35, Entertainment: 23, Food: 10, Other: 20 },
+    { date: '6/14', Grocery: 12, Transportation: 23, Entertainment: 122, Food: 12, Other: 10 },
+    { date: '6/15', Grocery: 22, Transportation: 3, Entertainment: 73, Food: 10, Other: 20 },
+    { date: '6/16', Grocery: 13, Transportation: 15, Entertainment: 32, Food: 10, Other: 20 },
+    { date: '6/17', Grocery: 44, Transportation: 35, Entertainment: 23, Food: 10, Other: 20 },
+    { date: '6/18', Grocery: 35, Transportation: 45, Entertainment: 20, Food: 10, Other: 20 },
+];
+
   return (
     <Container
       component="main"
@@ -70,6 +80,7 @@ export default function DashBoardPage() {
       }}
     >
       <DashboardBarChart title="Title Here" data={sampleData} />
+      <DashboardStackedBarChart title='Daily Transactions' data={sampleStackedData}/>
       <DashboardLineChart title="Title Here" data={sampleData} dataKey="pv" />
       <DashboardPieChart title="Title Here" data={pieData} />
     </Container>
