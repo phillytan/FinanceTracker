@@ -2,6 +2,7 @@ import * as React from "react";
 import Container from "@mui/material/Container";
 import DashboardBarChart from "../components/DashboardGraphs/BarChart";
 import DashboardLineChart from "../components/DashboardGraphs/LineChart";
+import DashboardPieChart from "../components/DashboardGraphs/PieChart";
 
 /**
  * Component for the dashboard page
@@ -52,6 +53,14 @@ export default function DashBoardPage() {
     },
   ];
 
+  const pieData = [
+    { name: 'Group A', value: 400 },
+    { name: 'Group B', value: 300 },
+    { name: 'Group C', value: 300 },
+    { name: 'Group D', value: 200 },
+    { name: 'Group E', value: 278 },
+  ];
+
   return (
     <Container
       component="main"
@@ -61,7 +70,8 @@ export default function DashBoardPage() {
       }}
     >
       <DashboardBarChart title="Title Here" data={sampleData} />
-      <DashboardLineChart title="Title Here" data={sampleData} dataKey="pv"/>
+      <DashboardLineChart title="Title Here" data={sampleData} dataKey="pv" />
+      <DashboardPieChart title="Title Here" data={pieData} />
     </Container>
   );
 }

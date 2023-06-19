@@ -13,14 +13,17 @@ import {
 
 const currencies = ["CAD", "USD", "EUR"];
 const transactionTypes = ["Grocery", "Transportation", "Entertainment", "Food", "Other"];
+const paymentMethods = ["Cash", "Visa", "Amex", "MasterCard", "Debit Card", "Other"];
 
 
 export default function UpdateTransactionItem(props) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(props.open);
     const [date, setDate] = React.useState('');
     const [transactionType, setTransactionType] = React.useState('');
     const [amount, setAmount] = React.useState(0);
     const [currency, setCurrency] = React.useState('');
+    const [paymentMethod, setPaymentMethod] = React.useState('');
+    const [address, setAddress] = React.useState('');
     const [description, setDescription] = React.useState('');
 
     const handleClickOpen = () => {
@@ -51,8 +54,9 @@ export default function UpdateTransactionItem(props) {
     const handleTransactionTypeChange = (e) => setTransactionType(e.target.value);
     const handleAmountChange = (e) => setAmount(e.target.value);
     const handleCurrencyChange = (e) => setCurrency(e.target.value);
+    const handlePaymentMethodChange = (e) => setPaymentMethod(e.target.value);
+    const handleAddressChange = (e) => setAddress(e.target.value);
     const handleDescriptionChange = (e) => setDescription(e.target.value);
-
 
     return (
         <div>
@@ -119,6 +123,32 @@ export default function UpdateTransactionItem(props) {
                             </MenuItem>
                         ))}
                     </TextField>
+                    <TextField
+                        id="outlined-select-payment-method"
+                        select
+                        defaultValue={paymentMethod}
+                        fullWidth
+                        onChange={handlePaymentMethodChange}
+                        label="Payment Method"
+                        helperText="Please select your payment method"
+                        sx={{ mb: 2 }}
+                    >
+                        {paymentMethods.map((method) => (
+                            <MenuItem key={method} value={method}>
+                                {method}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                    <TextField
+                        margin="dense"
+                        id="address"
+                        label="Address"
+                        type="text"
+                        fullWidth
+                        onChange={handleAddressChange}
+                        variant="standard"
+                        sx={{ mb: 2 }}
+                    />
                     <TextField
                         margin="dense"
                         id="description"
