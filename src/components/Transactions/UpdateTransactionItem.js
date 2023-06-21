@@ -11,47 +11,45 @@ import {
     TextField
 } from '@mui/material';
 
-const currencies = ["CAD", "USD", "EUR"];
+const currencies = ["CAD", "USD", "EUR", "AUD", "JPY", "KRW", "RMB", "HKD", "TWD", "MXN", "MYR", "NZD", "THB"];
 const transactionTypes = ["Grocery", "Transportation", "Entertainment", "Food", "Other"];
 
 
 export default function UpdateTransactionItem(props) {
-    const [open, setOpen] = React.useState(false);
-    const [date, setDate] = React.useState('');
-    const [transactionType, setTransactionType] = React.useState('');
-    const [amount, setAmount] = React.useState(0);
-    const [currency, setCurrency] = React.useState('');
-    const [description, setDescription] = React.useState('');
+    const default_state = {
+        open: false,
+        date: '',
+        transactionType: '',
+        amount: 0,
+        currency: '',
+        description: ''
+    }
+    const [transaction, setTransaction] = React.useState(default_state);
+
+    const handleChange = (event) => {
+        setTransaction({
+            ...transaction,
+            [event.target.name]: event.target.value
+        });
+    }
+
+    const resetFields = () => {
+        setTransaction(default_state);
+    }
 
     const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setCurrency('');
-        setTransactionType('');
-        setOpen(false);
+        setTransaction({
+            ...transaction,
+            open: true
+        });
     };
 
     const handleUpdate = () => {
-        if (date && transactionType && amount && currency && description) {
-            // dispatch add 
-            setDate('');
-            setTransactionType('');
-            setAmount(0);
-            setCurrency('');
-            setDescription('');
-            setOpen(false);
+        if (transaction.date && transaction.transactionType && transaction.amount && transaction.currency && transaction.description) {
+            // dispatch add TODO
+            resetFields();
         }
-        // TODO: remove after update is implemented
-        setOpen(false);
     };
-
-    const handleDateChange = (e) => setDate(e.target.value);
-    const handleTransactionTypeChange = (e) => setTransactionType(e.target.value);
-    const handleAmountChange = (e) => setAmount(e.target.value);
-    const handleCurrencyChange = (e) => setCurrency(e.target.value);
-    const handleDescriptionChange = (e) => setDescription(e.target.value);
 
 
     return (
@@ -59,7 +57,7 @@ export default function UpdateTransactionItem(props) {
             <Button onClick={handleClickOpen}>
                 Update Transaction
             </Button>
-            <Dialog open={open} onClose={handleClose} maxWidth="md">
+            <Dialog open={transaction.open} onClose={resetFields} maxWidth="md">
                 <DialogTitle>Update Transaction</DialogTitle>
                 <DialogContent >
                     <DialogContentText>
@@ -74,16 +72,17 @@ export default function UpdateTransactionItem(props) {
                         id="date"
                         type="date"
                         fullWidth
-                        onChange={handleDateChange}
+                        onChange={handleChange}
                         variant="standard"
                         sx={{ mb: 5 }}
                     />
                     <TextField
                         id="outlined-select-transaction-type"
                         select
-                        defaultValue={transactionType}
+                        defaultValue={transaction.transactionType}
                         fullWidth
-                        onChange={handleTransactionTypeChange}
+                        name="transactionType"
+                        onChange={handleChange}
                         label="Transaction Type"
                         helperText="Please select your transaction type"
                     >
@@ -99,16 +98,18 @@ export default function UpdateTransactionItem(props) {
                         label="Amount"
                         type="number"
                         fullWidth
-                        onChange={handleAmountChange}
+                        name="amount"
+                        onChange={handleChange}
                         variant="standard"
                         sx={{ mb: 5 }}
                     />
                     <TextField
                         id="outlined-select-currency"
                         select
-                        defaultValue={currency}
+                        defaultValue={transaction.currency}
                         fullWidth
-                        onChange={handleCurrencyChange}
+                        name="currency"
+                        onChange={handleChange}
                         label="Currency"
                         helperText="Please select your currency"
                         sx={{ mb: 2 }}
@@ -125,13 +126,14 @@ export default function UpdateTransactionItem(props) {
                         label="Description"
                         type="text"
                         fullWidth
-                        onChange={handleDescriptionChange}
+                        name="description"
+                        onChange={handleChange}
                         variant="standard"
                         sx={{ mb: 2 }}
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={resetFields}>Cancel</Button>
                     <Button onClick={handleUpdate}>Update</Button>
                 </DialogActions>
             </Dialog>
