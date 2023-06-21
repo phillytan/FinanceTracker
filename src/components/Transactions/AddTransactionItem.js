@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { addTransactionItem } from '../../redux/actions/transactions.js';
 import {
     Button,
     Dialog,
@@ -14,7 +16,6 @@ import {
 const currencies = ["CAD", "USD", "EUR", "AUD", "JPY", "KRW", "RMB", "HKD", "TWD", "MXN", "MYR", "NZD", "THB"];
 const transactionTypes = ["Grocery", "Transportation", "Entertainment", "Food", "Other"];
 const default_state = {
-    open: false,
     date: '',
     transactionType: '',
     amount: 0,
@@ -23,7 +24,9 @@ const default_state = {
 }
 
 export default function AddTransactionItem() {
+    const [open, setOpen] = React.useState(false);
     const [transaction, setTransaction] = React.useState(default_state);
+    const dispatch = useDispatch();
 
     const handleChange = (event) => {
         setTransaction({
@@ -33,19 +36,17 @@ export default function AddTransactionItem() {
     }
 
     const resetFields = () => {
+        setOpen(false);
         setTransaction(default_state);
     }
 
     const handleClickOpen = () => {
-        setTransaction({
-            ...transaction,
-            open: true
-        });
+        setOpen(true);
     };
 
     const handleAdd = () => {
         if (transaction.date && transaction.transactionType && transaction.amount && transaction.currency && transaction.description) {
-            // dispatch add TODO
+            dispatch(addTransactionItem(transaction));
         }
     };
 
@@ -54,7 +55,7 @@ export default function AddTransactionItem() {
             <Button variant="outlined" onClick={handleClickOpen}>
                 Add Transaction
             </Button>
-            <Dialog open={transaction.open} onClose={resetFields} maxWidth="md">
+            <Dialog open={open} onClose={resetFields} maxWidth="md">
                 <DialogTitle>Add Transaction</DialogTitle>
                 <DialogContent >
                     <DialogContentText>

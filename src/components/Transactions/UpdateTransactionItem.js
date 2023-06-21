@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { updateTransactionItem } from '../../redux/actions/transactions.js';
 import {
     Button,
     Dialog,
@@ -16,8 +18,9 @@ const transactionTypes = ["Grocery", "Transportation", "Entertainment", "Food", 
 
 
 export default function UpdateTransactionItem(props) {
+    const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(false);
     const default_state = {
-        open: false,
         date: '',
         transactionType: '',
         amount: 0,
@@ -34,19 +37,18 @@ export default function UpdateTransactionItem(props) {
     }
 
     const resetFields = () => {
+        setOpen(false);
         setTransaction(default_state);
     }
 
     const handleClickOpen = () => {
-        setTransaction({
-            ...transaction,
-            open: true
-        });
+        setOpen(true);
     };
 
     const handleUpdate = () => {
         if (transaction.date && transaction.transactionType && transaction.amount && transaction.currency && transaction.description) {
             // dispatch add TODO
+            dispatch(updateTransactionItem(transaction));
             resetFields();
         }
     };
@@ -57,7 +59,7 @@ export default function UpdateTransactionItem(props) {
             <Button onClick={handleClickOpen}>
                 Update Transaction
             </Button>
-            <Dialog open={transaction.open} onClose={resetFields} maxWidth="md">
+            <Dialog open={open} onClose={resetFields} maxWidth="md">
                 <DialogTitle>Update Transaction</DialogTitle>
                 <DialogContent >
                     <DialogContentText>
