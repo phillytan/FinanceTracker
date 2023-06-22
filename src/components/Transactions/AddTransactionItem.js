@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { addTransactionItem } from '../../redux/actions/transactions.js';
-import { currencies, transactionTypes, paymentMethods } from '../../transactionOptions.js';
+import { currencies, transactionTypes, paymentMethods } from '../../resources/transactionOptions.js';
 import {
     Button,
     Dialog,

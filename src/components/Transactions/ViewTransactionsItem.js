@@ -116,7 +116,7 @@ const TransactionsItemButton = (props) => {
                         Payment Method:
                     </Typography>
                     <Typography gutterBottom>
-                        Amex
+                        {props.item.paymentMethod}
                     </Typography>
 
                     {/* todo: payment method is static */}
@@ -124,15 +124,14 @@ const TransactionsItemButton = (props) => {
                         Address:
                     </Typography>
                     <Typography gutterBottom>
-                        487 east 12th avenue
+                        {props.item.address}
                     </Typography>
 
                     <Typography sx={DialogHeadings}>
                         Notes:
                     </Typography>
-
                     <Typography gutterBottom>
-                        Groceries for the first week of November.
+                        {props.item.description}
                     </Typography>
                 </DialogContent>
 
