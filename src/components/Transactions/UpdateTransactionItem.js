@@ -47,7 +47,7 @@ export default function UpdateTransactionItem(props) {
     };
 
     const handleUpdate = () => {
-        if (transaction.date && transaction.transactionType && transaction.amount && transaction.currency && transaction.description) {
+        if (transaction.merchantName && transaction.amount && transaction.address && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
             // dispatch add TODO
             transaction.id = props.item.id;
             dispatch(updateTransactionItem(transaction));

@@ -1,6 +1,7 @@
+import data from '../../resources/data.json';
 const { v4: uuid } = require('uuid');
 const initialState = {
-    transaction: []
+    transaction: data
 };
 
 const transactionReducer = (transactions = initialState, action) => {
@@ -13,7 +14,8 @@ const transactionReducer = (transactions = initialState, action) => {
                 transaction: [...transactions.transaction, action.payload]
             };
         case "UPDATE_TRANSACTION":
-            console.log("Updating transaction " + action.payload);
+            console.log("Updating transaction " + Object.values(action.payload));
+            console.log()
 
             return transactions.map((trans, index) => {
                 if (trans.id === action.payload.id) {

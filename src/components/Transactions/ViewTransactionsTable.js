@@ -6,13 +6,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import data from '../../resources/data.json';
+import { useSelector } from 'react-redux';
 import TransactionItem from './ViewTransactionsItem';
 
-const rows = data;
-
 const TransactionsTable = () => {
-  return (
+	const rows = useSelector(state => state.transactionReducer.transaction);
+  	return (
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
 				<TableHead>
@@ -27,7 +26,7 @@ const TransactionsTable = () => {
 				<TableBody>
 					{rows.map((row) => (
 						<TableRow
-							key={row.name}
+							key={row.id}
 							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 						>
 							<TableCell component="th" scope="row">

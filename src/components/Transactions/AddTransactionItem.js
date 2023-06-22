@@ -47,7 +47,7 @@ export default function AddTransactionItem() {
     };
 
     const handleAdd = () => {
-        if (transaction.date && transaction.transactionType && transaction.amount && transaction.currency && transaction.description) {
+        if (transaction.merchantName && transaction.amount && transaction.address && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
             dispatch(addTransactionItem(transaction));
             resetFields();
         }
@@ -167,7 +167,7 @@ export default function AddTransactionItem() {
                         label="Description"
                         type="text"
                         fullWidth
-                        name="description"
+                        name="description (optional)"
                         onChange={handleChange}
                         variant="standard"
                         sx={{ mb: 2 }}
