@@ -14,21 +14,25 @@ import SignupPage from "./pages/SignupPage";
 import DashBoardPage from "./pages/DashBoardPage";
 
 import NavBar from "./components/NavBar";
+import store from './redux/store/store.js';
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<BrowserRouter>
-				<NavBar />
-				<Routes>
-					<Route path={"/"} element={<IndexPage />} />
-					<Route path={"/dashboard"} element={<DashBoardPage />} />
-					<Route path={"/login"} element={<LoginPage />} />
-					<Route path={"/signup"} element={<SignupPage />} />
-				</Routes>
-			</BrowserRouter>
-		</ThemeProvider>
+		<Provider store={store}>
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<BrowserRouter>
+					<NavBar />
+					<Routes>
+						<Route path={"/"} element={<IndexPage />} />
+						<Route path={"/dashboard"} element={<DashBoardPage />} />
+						<Route path={"/login"} element={<LoginPage />} />
+						<Route path={"/signup"} element={<SignupPage />} />
+					</Routes>
+				</BrowserRouter>
+			</ThemeProvider>
+		</Provider>
 	</React.StrictMode>
 );
