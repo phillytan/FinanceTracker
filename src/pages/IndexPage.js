@@ -2,6 +2,7 @@ import { Container } from "@mui/material";
 import ViewTransactionsTable from "../components/Transactions/ViewTransactionsTable";
 import AddTransactionItem from "../components/Transactions/AddTransactionItem";
 
+
 function IndexPage() {
 	return (
 		<>

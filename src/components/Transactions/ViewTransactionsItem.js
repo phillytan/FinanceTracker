@@ -12,6 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 // https://mui.com/material-ui/react-dialog/
 
 import UpdateTransactionItem from './UpdateTransactionItem';
+import DeleteTransactionItem from './DeleteTransactionItem';
 
 /**
  * Styling for dialog box
@@ -153,14 +154,15 @@ const TransactionsItemButton = (props) => {
 
                 <DialogActions>
                     {/* todo: implement update action */}
-                    {/* <Button autoFocus>
+                    {/* <Button autoFocus onClick={handleUpdateClick}>
                         Update
                     </Button> */}
                     <UpdateTransactionItem item={props.item} />
                     {/* todo: implement delete action. */}
-                    <Button autoFocus onClick={handleDelete}>
+                    {/* <Button autoFocus onClick={handleDelete}>
                         Delete
-                    </Button>
+                    </Button> */}
+                    <DeleteTransactionItem />
                 </DialogActions>
             </Dialog>
         </div >
