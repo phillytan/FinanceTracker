@@ -1,4 +1,4 @@
-import { Button, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import ViewTransactionsTable from "../components/Transactions/ViewTransactionsTable";
 import AddTransactionItem from "../components/Transactions/AddTransactionItem";
 
@@ -12,7 +12,6 @@ function IndexPage() {
 				</div>
 				<ViewTransactionsTable />
 				<br />
-				<Button variant="contained">Hello World</Button>
 			</Container>
 		</>
 	);

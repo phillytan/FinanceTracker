@@ -1,4 +1,5 @@
 import React from 'react';
+// import { useDispatch } from 'react-redux';
 import { Button } from "@mui/material"
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
@@ -36,7 +37,7 @@ const dialogTheme = {
  */
 const DialogHeadings = {
     fontWeight: 'bold',
-    "margin-top": '15px'
+    "margin-top": '20px'
 }
 
 
@@ -89,6 +90,27 @@ const TransactionsItemButton = (props) => {
                 </DialogTitle>
 
                 <DialogContent dividers>
+                <Typography sx={DialogHeadings}>
+                        Merchant Name:
+                    </Typography>
+                    <Typography gutterBottom>
+                        {props.item.merchantName}
+                    </Typography>
+
+                    <Typography sx={DialogHeadings}>
+                        Amount:
+                    </Typography>
+                    <Typography gutterBottom>
+                        {props.item.amount}
+                    </Typography>
+
+                    <Typography sx={DialogHeadings} gutterBottom>
+                        Address:
+                    </Typography>
+                    <Typography gutterBottom>
+                        {props.item.address}
+                    </Typography>
+
                     <Typography sx={DialogHeadings}>
                         Date:
                     </Typography>
@@ -97,10 +119,10 @@ const TransactionsItemButton = (props) => {
                     </Typography>
 
                     <Typography sx={DialogHeadings}>
-                        Amount:
+                        Transaction Type:
                     </Typography>
                     <Typography gutterBottom>
-                        {props.item.amount}
+                        {props.item.transactionType}
                     </Typography>
 
                     <Typography sx={DialogHeadings}>
@@ -116,23 +138,16 @@ const TransactionsItemButton = (props) => {
                         Payment Method:
                     </Typography>
                     <Typography gutterBottom>
-                        Amex
+                        {props.item.paymentMethod}
                     </Typography>
 
                     {/* todo: payment method is static */}
-                    <Typography sx={DialogHeadings} gutterTop>
-                        Address:
-                    </Typography>
-                    <Typography gutterBottom>
-                        487 east 12th avenue
-                    </Typography>
 
                     <Typography sx={DialogHeadings}>
                         Notes:
                     </Typography>
-
                     <Typography gutterBottom>
-                        Groceries for the first week of November.
+                        {props.item.description}
                     </Typography>
                 </DialogContent>
 

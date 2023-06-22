@@ -1,0 +1,22 @@
+[{
+    "merchantName": "No Frills Vancouver",
+    "amount": "69.99",
+    "address": "1212 Test Street",
+    "date": "2020-02-11",
+    "transactionType": "Grocery",
+    "currency": "CAD",
+    "paymentMethod": "Cash",
+    "description": "Groceries for the first week of November.",
+    "id": "testId123"
+},
+{
+    "merchantName": "Uncle Fatihs UBC",
+    "amount": "12.95",
+    "address": "1313 Happy Avenue",
+    "date": "2019-05-29",
+    "transactionType": "Food",
+    "currency": "CAD",
+    "paymentMethod": "Credit Card",
+    "description": "Yum yums",
+    "id": "testId456"
+}]
