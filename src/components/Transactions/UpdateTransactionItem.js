@@ -19,14 +19,14 @@ export default function UpdateTransactionItem(props) {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
     const default_state = {
-        merchantName: props.item.merchantName,
-        amount: props.item.amount,
-        address: props.item.address,
-        date: props.item.date,
-        transactionType: props.item.transactionType,
-        currency: props.item.currency,
-        paymentMethod: props.item.paymentMethod,
-        description: props.item.description
+        merchantName: '',
+        amount: '',
+        address: '',
+        date: '',
+        transactionType: '',
+        currency: '',
+        paymentMethod: '',
+        description: ''
     }
     const [transaction, setTransaction] = React.useState(default_state);
 
@@ -44,6 +44,7 @@ export default function UpdateTransactionItem(props) {
 
     const handleClickOpen = () => {
         setOpen(true);
+        setTransaction(props.item);
     };
 
     const handleUpdate = () => {
@@ -71,7 +72,7 @@ export default function UpdateTransactionItem(props) {
                         margin="dense"
                         id="merchantName"
                         label="Merchant Name"
-                        defaultValue={transaction.merchantName}
+                        value={transaction.merchantName}
                         type="text"
                         fullWidth
                         name="merchantName"
@@ -83,7 +84,7 @@ export default function UpdateTransactionItem(props) {
                         margin="dense"
                         id="amount"
                         label="Amount"
-                        defaultValue={transaction.amount}
+                        value={transaction.amount}
                         type="number"
                         fullWidth
                         name="amount"
@@ -95,7 +96,7 @@ export default function UpdateTransactionItem(props) {
                         margin="dense"
                         id="address"
                         label="Address of Transaction"
-                        defaultValue={transaction.address}
+                        value={transaction.address}
                         type="text"
                         fullWidth
                         name="address"
@@ -110,7 +111,7 @@ export default function UpdateTransactionItem(props) {
                         autoFocus
                         margin="dense"
                         id="date"
-                        defaultValue={transaction.date}
+                        value={transaction.date}
                         type="date"
                         name="date"
                         fullWidth
@@ -121,7 +122,7 @@ export default function UpdateTransactionItem(props) {
                     <TextField
                         id="outlined-select-transaction-type"
                         select
-                        defaultValue={transaction.transactionType}
+                        value={transaction.transactionType}
                         fullWidth
                         name="transactionType"
                         onChange={handleChange}
@@ -137,7 +138,7 @@ export default function UpdateTransactionItem(props) {
                     <TextField
                         id="outlined-select-currency"
                         select
-                        defaultValue={transaction.currency}
+                        value={transaction.currency}
                         fullWidth
                         name="currency"
                         onChange={handleChange}
@@ -154,7 +155,7 @@ export default function UpdateTransactionItem(props) {
                     <TextField
                         id="outlined-select-payment-method"
                         select
-                        defaultValue={transaction.paymentMethod}
+                        value={transaction.paymentMethod}
                         fullWidth
                         name="paymentMethod"
                         onChange={handleChange}
@@ -172,7 +173,7 @@ export default function UpdateTransactionItem(props) {
                         margin="dense"
                         id="description"
                         label="Description"
-                        defaultValue={transaction.description}
+                        value={transaction.description}
                         type="text"
                         fullWidth
                         name="description"

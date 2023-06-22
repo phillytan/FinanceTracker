@@ -15,17 +15,10 @@ const transactionReducer = (transactions = initialState, action) => {
             };
         case "UPDATE_TRANSACTION":
             console.log("Updating transaction " + Object.values(action.payload));
-            console.log()
-
-            return transactions.map((trans, index) => {
-                if (trans.id === action.payload.id) {
-                    return {
-                        ...trans,
-                        index: action.payload
-                    }
-                }
-                return trans;
-            });
+            return {
+                ...transactions,
+                transaction: transactions.transaction.map((trans, i) => trans.id === action.payload.id ? action.payload : trans)
+            }
         default:
             return transactions;
     }
