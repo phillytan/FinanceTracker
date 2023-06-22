@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import {
     Button,
     Dialog,
@@ -7,9 +8,11 @@ import {
     DialogContentText,
     DialogTitle
 } from '@mui/material';
+import { deleteTransactionItem } from '../../redux/actions/transactions.js';
 
 export default function UpdateTransactionItem(props) {
-    const [open, setOpen] = React.useState(props.open);
+    const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -18,6 +21,10 @@ export default function UpdateTransactionItem(props) {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleDelete = () => {
+        dispatch(deleteTransactionItem(props.item));
+    }
 
     return (
         <div>
@@ -33,7 +40,7 @@ export default function UpdateTransactionItem(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Delete</Button>
+                    <Button onClick={handleDelete}>Delete</Button>
                 </DialogActions>
             </Dialog>
         </div>

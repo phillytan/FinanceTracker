@@ -19,6 +19,12 @@ const transactionReducer = (transactions = initialState, action) => {
                 ...transactions,
                 transaction: transactions.transaction.map((trans, i) => trans.id === action.payload.id ? action.payload : trans)
             }
+        case "DELETE_TRANSACTION":
+            console.log("Deleting transaction " + Object.values(action.payload));
+            return {
+                ...transactions,
+                transaction: transactions.transaction.filter((trans, i) => trans !== action.payload)
+            }
         default:
             return transactions;
     }

@@ -11,3 +11,10 @@ export const updateTransactionItem = transaction => {
         payload: transaction
     };
 }
+
+export const deleteTransactionItem = transaction => {
+    return {
+        type: "DELETE_TRANSACTION",
+        payload: transaction
+    };
+}
