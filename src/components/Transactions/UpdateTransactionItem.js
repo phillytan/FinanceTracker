@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { updateTransactionItem } from '../../redux/actions/transactions.js';
+import { currencies, transactionTypes, paymentMethods } from '../../transactionOptions.js';
 import {
     Button,
     Dialog,
@@ -13,19 +14,19 @@ import {
     TextField
 } from '@mui/material';
 
-const currencies = ["CAD", "USD", "EUR", "AUD", "JPY", "KRW", "RMB", "HKD", "TWD", "MXN", "MYR", "NZD", "THB"];
-const transactionTypes = ["Grocery", "Transportation", "Entertainment", "Food", "Other"];
-
 
 export default function UpdateTransactionItem(props) {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
     const default_state = {
-        date: '',
-        transactionType: '',
-        amount: 0,
-        currency: '',
-        description: ''
+        merchantName: props.item.merchantName,
+        amount: props.item.amount,
+        address: props.item.address,
+        date: props.item.date,
+        transactionType: props.item.transactionType,
+        currency: props.item.currency,
+        paymentMethod: props.item.paymentMethod,
+        description: props.item.description
     }
     const [transaction, setTransaction] = React.useState(default_state);
 
@@ -48,6 +49,7 @@ export default function UpdateTransactionItem(props) {
     const handleUpdate = () => {
         if (transaction.date && transaction.transactionType && transaction.amount && transaction.currency && transaction.description) {
             // dispatch add TODO
+            transaction.id = props.item.id;
             dispatch(updateTransactionItem(transaction));
             resetFields();
         }
@@ -63,8 +65,44 @@ export default function UpdateTransactionItem(props) {
                 <DialogTitle>Update Transaction</DialogTitle>
                 <DialogContent >
                     <DialogContentText>
-                        Please enter the transaction details below:
+                        Please enter the new transaction details below:
                     </DialogContentText>
+                    <TextField
+                        margin="dense"
+                        id="merchantName"
+                        label="Merchant Name"
+                        defaultValue={transaction.merchantName}
+                        type="text"
+                        fullWidth
+                        name="merchantName"
+                        onChange={handleChange}
+                        variant="standard"
+                        sx={{ mb: 2 }}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="amount"
+                        label="Amount"
+                        defaultValue={transaction.amount}
+                        type="number"
+                        fullWidth
+                        name="amount"
+                        onChange={handleChange}
+                        variant="standard"
+                        sx={{ mb: 5 }}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="address"
+                        label="Address of Transaction"
+                        defaultValue={transaction.address}
+                        type="text"
+                        fullWidth
+                        name="address"
+                        onChange={handleChange}
+                        variant="standard"
+                        sx={{ mb: 2 }}
+                    />
                     <InputLabel id="date-label" sx={{ marginTop: 2 }}>
                         Date
                     </InputLabel>
@@ -72,7 +110,9 @@ export default function UpdateTransactionItem(props) {
                         autoFocus
                         margin="dense"
                         id="date"
+                        defaultValue={transaction.date}
                         type="date"
+                        name="date"
                         fullWidth
                         onChange={handleChange}
                         variant="standard"
@@ -95,17 +135,6 @@ export default function UpdateTransactionItem(props) {
                         ))}
                     </TextField>
                     <TextField
-                        margin="dense"
-                        id="amount"
-                        label="Amount"
-                        type="number"
-                        fullWidth
-                        name="amount"
-                        onChange={handleChange}
-                        variant="standard"
-                        sx={{ mb: 5 }}
-                    />
-                    <TextField
                         id="outlined-select-currency"
                         select
                         defaultValue={transaction.currency}
@@ -123,9 +152,27 @@ export default function UpdateTransactionItem(props) {
                         ))}
                     </TextField>
                     <TextField
+                        id="outlined-select-payment-method"
+                        select
+                        defaultValue={transaction.paymentMethod}
+                        fullWidth
+                        name="paymentMethod"
+                        onChange={handleChange}
+                        label="Payment Method"
+                        helperText="Please select the method of payment used"
+                        sx={{ mb: 2 }}
+                    >
+                        {paymentMethods.map((method) => (
+                            <MenuItem key={method} value={method}>
+                                {method}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                    <TextField
                         margin="dense"
                         id="description"
                         label="Description"
+                        defaultValue={transaction.description}
                         type="text"
                         fullWidth
                         name="description"

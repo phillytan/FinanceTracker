@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { addTransactionItem } from '../../redux/actions/transactions.js';
+import { currencies, transactionTypes, paymentMethods } from '../../transactionOptions.js';
 import {
     Button,
     Dialog,
@@ -13,13 +14,14 @@ import {
     TextField
 } from '@mui/material';
 
-const currencies = ["CAD", "USD", "EUR", "AUD", "JPY", "KRW", "RMB", "HKD", "TWD", "MXN", "MYR", "NZD", "THB"];
-const transactionTypes = ["Grocery", "Transportation", "Entertainment", "Food", "Other"];
 const default_state = {
+    merchantName: '',
+    amount: 0,
+    address: '',
     date: '',
     transactionType: '',
-    amount: 0,
     currency: '',
+    paymentMethod: '',
     description: ''
 }
 
@@ -47,6 +49,7 @@ export default function AddTransactionItem() {
     const handleAdd = () => {
         if (transaction.date && transaction.transactionType && transaction.amount && transaction.currency && transaction.description) {
             dispatch(addTransactionItem(transaction));
+            resetFields();
         }
     };
 
@@ -61,6 +64,39 @@ export default function AddTransactionItem() {
                     <DialogContentText>
                         Please enter the transaction details below:
                     </DialogContentText>
+                    <TextField
+                        margin="dense"
+                        id="merchantName"
+                        label="Merchant Name"
+                        type="text"
+                        fullWidth
+                        name="merchantName"
+                        onChange={handleChange}
+                        variant="standard"
+                        sx={{ mb: 2 }}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="amount"
+                        label="Amount"
+                        type="number"
+                        fullWidth
+                        name="amount"
+                        onChange={handleChange}
+                        variant="standard"
+                        sx={{ mb: 5 }}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="address"
+                        label="Address of Transaction"
+                        type="text"
+                        fullWidth
+                        name="address"
+                        onChange={handleChange}
+                        variant="standard"
+                        sx={{ mb: 2 }}
+                    />
                     <InputLabel id="date-label" sx={{ marginTop: 2 }}>
                         Date
                     </InputLabel>
@@ -92,17 +128,6 @@ export default function AddTransactionItem() {
                         ))}
                     </TextField>
                     <TextField
-                        margin="dense"
-                        id="amount"
-                        label="Amount"
-                        type="number"
-                        fullWidth
-                        name="amount"
-                        onChange={handleChange}
-                        variant="standard"
-                        sx={{ mb: 5 }}
-                    />
-                    <TextField
                         id="outlined-select-currency"
                         select
                         defaultValue={default_state.currency}
@@ -116,6 +141,23 @@ export default function AddTransactionItem() {
                         {currencies.map((currency) => (
                             <MenuItem key={currency} value={currency}>
                                 {currency}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                    <TextField
+                        id="outlined-select-payment-method"
+                        select
+                        defaultValue={default_state.paymentMethod}
+                        fullWidth
+                        name="paymentMethod"
+                        onChange={handleChange}
+                        label="Payment Method"
+                        helperText="Please select the method of payment used"
+                        sx={{ mb: 2 }}
+                    >
+                        {paymentMethods.map((method) => (
+                            <MenuItem key={method} value={method}>
+                                {method}
                             </MenuItem>
                         ))}
                     </TextField>
