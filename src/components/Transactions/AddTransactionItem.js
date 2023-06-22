@@ -16,7 +16,7 @@ import {
 
 const default_state = {
     merchantName: '',
-    amount: 0,
+    amount: '',
     address: '',
     date: '',
     transactionType: '',
