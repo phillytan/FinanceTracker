@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useDispatch } from 'react-redux';
 import { Button } from "@mui/material"
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
@@ -55,11 +54,6 @@ const TransactionsItemButton = (props) => {
         setOpen(true);
     };
     const handleClose = () => {
-        setOpen(false);
-    };
-
-    //todo: finish handle delete functionality
-    const handleDelete = () => {
         setOpen(false);
     };
 
@@ -153,16 +147,8 @@ const TransactionsItemButton = (props) => {
                 </DialogContent>
 
                 <DialogActions>
-                    {/* todo: implement update action */}
-                    {/* <Button autoFocus onClick={handleUpdateClick}>
-                        Update
-                    </Button> */}
                     <UpdateTransactionItem item={props.item} />
-                    {/* todo: implement delete action. */}
-                    {/* <Button autoFocus onClick={handleDelete}>
-                        Delete
-                    </Button> */}
-                    <DeleteTransactionItem />
+                    <DeleteTransactionItem item={props.item}/>
                 </DialogActions>
             </Dialog>
         </div >
