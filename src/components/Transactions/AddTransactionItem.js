@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { addTransactionItem } from '../../redux/actions/transactions.js';
+import { currencies, transactionTypes, paymentMethods } from '../../resources/transactionOptions.js';
 import {
     Button,
     Dialog,
@@ -11,19 +14,21 @@ import {
     TextField
 } from '@mui/material';
 
-const currencies = ["CAD", "USD", "EUR", "AUD", "JPY", "KRW", "RMB", "HKD", "TWD", "MXN", "MYR", "NZD", "THB"];
-const transactionTypes = ["Grocery", "Transportation", "Entertainment", "Food", "Other"];
 const default_state = {
-    open: false,
+    merchantName: '',
+    amount: '',
+    address: '',
     date: '',
     transactionType: '',
-    amount: 0,
     currency: '',
+    paymentMethod: '',
     description: ''
 }
 
 export default function AddTransactionItem() {
+    const [open, setOpen] = React.useState(false);
     const [transaction, setTransaction] = React.useState(default_state);
+    const dispatch = useDispatch();
 
     const handleChange = (event) => {
         setTransaction({
@@ -33,19 +38,18 @@ export default function AddTransactionItem() {
     }
 
     const resetFields = () => {
+        setOpen(false);
         setTransaction(default_state);
     }
 
     const handleClickOpen = () => {
-        setTransaction({
-            ...transaction,
-            open: true
-        });
+        setOpen(true);
     };
 
     const handleAdd = () => {
-        if (transaction.date && transaction.transactionType && transaction.amount && transaction.currency && transaction.description) {
-            // dispatch add TODO
+        if (transaction.merchantName && transaction.amount && transaction.address && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
+            dispatch(addTransactionItem(transaction));
+            resetFields();
         }
     };
 
@@ -54,12 +58,45 @@ export default function AddTransactionItem() {
             <Button variant="outlined" onClick={handleClickOpen}>
                 Add Transaction
             </Button>
-            <Dialog open={transaction.open} onClose={resetFields} maxWidth="md">
+            <Dialog open={open} onClose={resetFields} maxWidth="md">
                 <DialogTitle>Add Transaction</DialogTitle>
                 <DialogContent >
                     <DialogContentText>
                         Please enter the transaction details below:
                     </DialogContentText>
+                    <TextField
+                        margin="dense"
+                        id="merchantName"
+                        label="Merchant Name"
+                        type="text"
+                        fullWidth
+                        name="merchantName"
+                        onChange={handleChange}
+                        variant="standard"
+                        sx={{ mb: 2 }}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="amount"
+                        label="Amount"
+                        type="number"
+                        fullWidth
+                        name="amount"
+                        onChange={handleChange}
+                        variant="standard"
+                        sx={{ mb: 5 }}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="address"
+                        label="Address of Transaction"
+                        type="text"
+                        fullWidth
+                        name="address"
+                        onChange={handleChange}
+                        variant="standard"
+                        sx={{ mb: 2 }}
+                    />
                     <InputLabel id="date-label" sx={{ marginTop: 2 }}>
                         Date
                     </InputLabel>
@@ -91,17 +128,6 @@ export default function AddTransactionItem() {
                         ))}
                     </TextField>
                     <TextField
-                        margin="dense"
-                        id="amount"
-                        label="Amount"
-                        type="number"
-                        fullWidth
-                        name="amount"
-                        onChange={handleChange}
-                        variant="standard"
-                        sx={{ mb: 5 }}
-                    />
-                    <TextField
                         id="outlined-select-currency"
                         select
                         defaultValue={default_state.currency}
@@ -119,12 +145,29 @@ export default function AddTransactionItem() {
                         ))}
                     </TextField>
                     <TextField
+                        id="outlined-select-payment-method"
+                        select
+                        defaultValue={default_state.paymentMethod}
+                        fullWidth
+                        name="paymentMethod"
+                        onChange={handleChange}
+                        label="Payment Method"
+                        helperText="Please select the method of payment used"
+                        sx={{ mb: 2 }}
+                    >
+                        {paymentMethods.map((method) => (
+                            <MenuItem key={method} value={method}>
+                                {method}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                    <TextField
                         margin="dense"
                         id="description"
                         label="Description"
                         type="text"
                         fullWidth
-                        name="description"
+                        name="description (optional)"
                         onChange={handleChange}
                         variant="standard"
                         sx={{ mb: 2 }}
