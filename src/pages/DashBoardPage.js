@@ -4,7 +4,7 @@ import DashboardBarChart from "../components/DashboardGraphs/BarChart";
 import DashboardLineChart from "../components/DashboardGraphs/LineChart";
 import DashboardPieChart from "../components/DashboardGraphs/PieChart";
 import DashboardStackedBarChart from "../components/DashboardGraphs/StackedBarChart";
-
+import Grid from '@mui/material/Grid';
 /**
  * Component for the dashboard page
  */
@@ -74,15 +74,18 @@ export default function DashBoardPage() {
   return (
     <Container
       component="main"
-      maxWidth="xs"
       sx={{
-        paddingTop: "15px",
+        paddingTop: "30px",
       }}
     >
-      <DashboardBarChart title="Title Here" data={sampleData} />
-      <DashboardStackedBarChart title='Daily Transactions' data={sampleStackedData}/>
-      <DashboardLineChart title="Title Here" data={sampleData} dataKey="pv" />
-      <DashboardPieChart title="Title Here" data={pieData} />
+      {/* todo: make the Grid sizing part of the graph components instead */}
+      <Grid container spacing={2}>
+          <DashboardLineChart title="Money In" data={sampleData} dataKey="pv" />
+          <DashboardLineChart title="Money Out" data={sampleData} dataKey="pv" />
+          <DashboardPieChart title="Title Here" data={pieData} />
+          <DashboardBarChart title="Title Here" data={sampleData} />
+          <DashboardStackedBarChart title='Daily Transactions' data={sampleStackedData}/>
+      </Grid>
     </Container>
   );
 }

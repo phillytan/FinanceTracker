@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Card, CardContent, Typography } from "@mui/material";
 import {Line, ResponsiveContainer, XAxis, LineChart } from 'recharts';
+import Grid from '@mui/material/Grid';
 
 /**
  * Component for displaying a bar chart
@@ -14,6 +15,7 @@ import {Line, ResponsiveContainer, XAxis, LineChart } from 'recharts';
 export default function DashboardLineChart(props) {
 
     return (
+        <Grid item xs={4}>
         <Card variant={'outlined'}>
             <CardContent>
                 <Typography variant={'h6'} align={'center'}>{props.title}</Typography>
@@ -25,5 +27,6 @@ export default function DashboardLineChart(props) {
                 </ResponsiveContainer>
             </CardContent>
         </Card>
+        </Grid>
     );
 }
