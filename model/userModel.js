@@ -11,7 +11,5 @@ const User = new Schema(
     password: { type: String, required: true },
     kusername: { type: String, required: true },
     transactions: [{ type: Schema.Types.ObjectId, ref: "transaction" }],
-  },
-  { timestamps: true, toObject: { getters: true }, toJSON: { getters: true } }
-);
+  });
 module.exports = mongoose.model("users", User);
