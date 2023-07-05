@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const { encrypt, decrypt } = require("../util/security");
 
+// create a schema
 const userSchema = new mongoose.Schema(
   {
     fname: { type: String, required: true },
@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// create a model
 const User = mongoose.model("user", userSchema);
 
 module.exports = User;
