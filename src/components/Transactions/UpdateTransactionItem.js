@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { updateTransactionItem } from '../../redux/actions/transactions.js';
+import { updateTransaction } from "../../redux/slices/transactionsSlice";
 import { currencies, transactionTypes, paymentMethods } from '../../resources/transactionOptions.js';
 import {
     Button,
@@ -50,7 +50,7 @@ export default function UpdateTransactionItem(props) {
     const handleUpdate = () => {
         if (transaction.merchantName && transaction.amount && transaction.address && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
             transaction.id = props.item.id;
-            dispatch(updateTransactionItem(transaction));
+            dispatch(updateTransaction(transaction));
             resetFields();
         }
     };
