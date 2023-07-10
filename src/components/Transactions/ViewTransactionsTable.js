@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import TransactionItem from './ViewTransactionsItem';
 
 const TransactionsTable = () => {
-	const rows = useSelector(state => state.transactionReducer.transaction);
+	const rows = useSelector((state) => state.transactions.transactions);
   	return (
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">

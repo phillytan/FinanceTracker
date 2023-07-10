@@ -8,7 +8,7 @@ import {
     DialogContentText,
     DialogTitle
 } from '@mui/material';
-import { deleteTransactionItem } from '../../redux/actions/transactions.js';
+import { deleteTransaction } from '../../redux/slices/transactionsSlice'
 
 export default function UpdateTransactionItem(props) {
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function UpdateTransactionItem(props) {
     };
 
     const handleDelete = () => {
-        dispatch(deleteTransactionItem(props.item));
+        dispatch(deleteTransaction(props.item));
     }
 
     return (
