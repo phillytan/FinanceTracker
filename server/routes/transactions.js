@@ -2,9 +2,16 @@ var express = require('express');
 var router = express.Router();
 const Transaction = require('../model/transactionModel')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a transaction');
+// GET TRANSACTIONS
+router.get('/', function(_, res) {
+  Transaction.find()
+  .then((transactions) => {
+    return res.status(200).send(transactions)
+  })
+  .catch((error) => {
+    console.error(error)
+    return res.status(400).send(error)
+  })
 });
 
 // UPDATE TRANSACTION
