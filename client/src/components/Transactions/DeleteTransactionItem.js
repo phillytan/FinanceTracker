@@ -9,6 +9,7 @@ import {
     DialogTitle
 } from '@mui/material';
 import { deleteTransaction } from '../../redux/slices/transactionsSlice'
+import { deleteTransactionAsync } from '../../redux/thunks/transactionThunk';
 
 export default function UpdateTransactionItem(props) {
     const dispatch = useDispatch();
@@ -23,7 +24,8 @@ export default function UpdateTransactionItem(props) {
     };
 
     const handleDelete = () => {
-        dispatch(deleteTransaction(props.item));
+        // dispatch(deleteTransaction(props.item));
+        dispatch(deleteTransactionAsync(props.item));
     }
 
     return (

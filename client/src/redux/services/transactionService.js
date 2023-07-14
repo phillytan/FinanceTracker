@@ -1,13 +1,15 @@
+const url = 'http://localhost:3001';
+
 const getTransactions = async () => {
-    const response = await fetch('http://localhost:3000/transactions', {
-      method: 'GET'
+    const response = await fetch(url + '/transactions', {
+        method: 'GET'
     });
     const data = await response.json()
     return data
-  };
+};
 
 const updateTransaction = async (transaction) => {
-    const response = await fetch(`http://localhost:3000/transactions/${transaction._id}`, {
+    const response = await fetch(url + `/transactions/${transaction._id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -23,5 +25,22 @@ const updateTransaction = async (transaction) => {
     return data
 }
 
-const service = { getTransactions, updateTransaction }
+const deleteTransaction = async (transaction) => {
+    const response = await fetch(url + `/transactions/${transaction._id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(transaction)
+    })
+
+    const data = await response.json()
+    if (!response.ok) {
+        const errorMsg = data?.message
+        throw new Error(errorMsg)
+    }
+    return data
+}
+
+const service = { getTransactions, updateTransaction, deleteTransaction }
 export default service
