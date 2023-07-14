@@ -14,3 +14,10 @@ export const updateTransactionAsync = createAsyncThunk(
         return await TransactionService.updateTransaction(transaction)
     }
 )
+
+export const deleteTransactionAsync = createAsyncThunk(
+    'transactions/deleteTransaction',
+    async (transaction) => {
+        return await TransactionService.deleteTransaction(transaction)
+    }
+)
