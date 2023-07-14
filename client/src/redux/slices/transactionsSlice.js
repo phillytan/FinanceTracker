@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import data from "../../resources/data.json";
 import { v4 as uuid } from 'uuid'
-import { deleteTransactionAsync, getTransactionsAsync, updateTransactionAsync } from "../thunks/transactionThunk";
+import { deleteTransactionAsync, getTransactionsAsync, addTransactionsAsync, updateTransactionAsync } from "../thunks/transactionThunk";
 
 const DEFAULT_STATE = {
 	//   transactions: data
@@ -36,6 +36,9 @@ export const transactionsSlice = createSlice({
 			.addCase(getTransactionsAsync.fulfilled, (state, action) => {
 				console.log('payload:', action.payload)
 				state.transactions = action.payload
+			})
+			.addCase(addTransactionsAsync.fulfilled, (state, action) => {
+				state.transactions = state.transactions.concat(action.payload);
 			})
 			.addCase(updateTransactionAsync.fulfilled, (state, action) => {
 				state.transactions = state.transactions.map((trans) =>

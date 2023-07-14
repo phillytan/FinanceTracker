@@ -8,6 +8,18 @@ const getTransactions = async () => {
     return data
 };
 
+const addTransactions = async (transactions) => {
+    const response = await fetch(url + '/transactions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(transactions)
+    });
+    const data = await response.json()
+    return data
+};
+
 const updateTransaction = async (transaction) => {
     const response = await fetch(url + `/transactions/${transaction._id}`, {
         method: 'PUT',
@@ -42,5 +54,5 @@ const deleteTransaction = async (transaction) => {
     return data
 }
 
-const service = { getTransactions, updateTransaction, deleteTransaction }
+const service = { getTransactions, addTransactions, updateTransaction, deleteTransaction }
 export default service

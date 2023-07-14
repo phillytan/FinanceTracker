@@ -14,6 +14,18 @@ router.get('/', function (_, res) {
     })
 });
 
+// INSERT TRANSACTIONS. Takes in an array of transactions
+router.post('/', function (req, res) {
+  Transaction.insertMany(req.body)
+  .then((transactions) => {
+    return res.status(200).send(transactions)
+  })
+  .catch((error) => {
+    console.error(error)
+    return res.status(400).send(error)
+  })
+})
+
 // UPDATE TRANSACTION
 router.put('/:id', function (req, res) {
   Transaction.findByIdAndUpdate(req.params.id, req.body, { new: true })
