@@ -11,7 +11,7 @@ const transactionSchema = new mongoose.Schema(
         currency: { type: String, required: true },
         paymentMethod: { type: String, required: true },
         description: { type: String, required: false },
-        user: [{ type: Schema.Types.ObjectId, ref: "user" }],
+        user: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
     },
     { timestamps: true }
 );

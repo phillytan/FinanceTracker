@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { updateTransaction } from "../../redux/slices/transactionsSlice";
 import { currencies, transactionTypes, paymentMethods } from '../../resources/transactionOptions.js';
 import {
     Button,
@@ -13,6 +12,8 @@ import {
     MenuItem,
     TextField
 } from '@mui/material';
+import { updateTransactionAsync } from '../../redux/thunks/transactionThunk';
+import { getDateString } from '../../utils/date.js';
 
 
 export default function UpdateTransactionItem(props) {
@@ -48,13 +49,12 @@ export default function UpdateTransactionItem(props) {
     };
 
     const handleUpdate = () => {
-        if (transaction.merchantName && transaction.amount && transaction.address && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
-            transaction.id = props.item.id;
-            dispatch(updateTransaction(transaction));
+        if (transaction.amount && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
+            dispatch(updateTransactionAsync(transaction))
             resetFields();
         }
     };
-
+    const dateString = transaction.date ? getDateString(transaction.date) : ''
 
     return (
         <div>
@@ -110,7 +110,7 @@ export default function UpdateTransactionItem(props) {
                         autoFocus
                         margin="dense"
                         id="date"
-                        value={transaction.date}
+                        value={dateString}
                         type="date"
                         name="date"
                         fullWidth
