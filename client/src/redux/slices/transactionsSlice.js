@@ -3,6 +3,7 @@ import data from "../../resources/data.json";
 import { v4 as uuid } from 'uuid'
 import { deleteTransactionAsync, getTransactionsAsync, addTransactionsAsync, updateTransactionAsync } from "../thunks/transactionThunk";
 
+
 const DEFAULT_STATE = {
 	//   transactions: data
 	transactions: []
@@ -40,6 +41,7 @@ export const transactionsSlice = createSlice({
 			.addCase(addTransactionsAsync.fulfilled, (state, action) => {
 				state.transactions = state.transactions.concat(action.payload);
 			})
+
 			.addCase(updateTransactionAsync.fulfilled, (state, action) => {
 				state.transactions = state.transactions.map((trans) =>
 					trans._id === action.payload._id ? action.payload : trans

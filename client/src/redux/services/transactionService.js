@@ -55,4 +55,5 @@ const deleteTransaction = async (transaction) => {
 }
 
 const service = { getTransactions, addTransactions, updateTransaction, deleteTransaction }
+
 export default service
