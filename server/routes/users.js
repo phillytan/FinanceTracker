@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     return res.status(200).send(createJWTSession(user))
   } catch (error) {
     console.error(error);
-    return res.status(400).send(error);
+    return res.status(400).send({ message: 'Email Address already exists' });
   }
 })
 
