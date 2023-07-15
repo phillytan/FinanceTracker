@@ -10,7 +10,6 @@ const Notification = () => {
 	const [type, setType] = useState("info");
 
 	global.setNotification = (type, message) => {
-    console.log('1234')
 		setOpen(true);
 		setMessage(message);
 		setType(type);
