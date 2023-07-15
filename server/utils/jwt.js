@@ -6,7 +6,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'The quick brown fox jumps over the
 // Helper function to create a JWT session token
 const createJWTSession = (user) => {
 	return {
-		token: jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "1h" }),
+		token: jwt.sign({ userId: user.id }, JWT_SECRET, {}),
 	};
 };
 
