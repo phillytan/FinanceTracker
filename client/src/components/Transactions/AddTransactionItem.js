@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { addTransaction } from '../../redux/slices/transactionsSlice'
+import { addTransactionsAsync } from '../../redux/thunks/transactionThunk';
+
 import { currencies, transactionTypes, paymentMethods } from '../../resources/transactionOptions.js';
 import {
     Button,
@@ -48,7 +49,7 @@ export default function AddTransactionItem() {
 
     const handleAdd = () => {
         if (transaction.merchantName && transaction.amount && transaction.address && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
-            dispatch(addTransaction(transaction));
+            dispatch(addTransactionsAsync([transaction]));
             resetFields();
         }
     };

@@ -4,8 +4,20 @@ const getTransactions = async () => {
     const response = await fetch(url + '/transactions', {
         method: 'GET'
     });
-    const data = await response.json()
-    return data
+    const data = await response.json();
+    return data;
+};
+
+const addTransactions = async (transactions) => {
+    const response = await fetch(url + '/transactions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(transactions)
+    });
+    const data = await response.json();
+    return data;
 };
 
 const updateTransaction = async (transaction) => {
@@ -22,7 +34,7 @@ const updateTransaction = async (transaction) => {
         const errorMsg = data?.message
         throw new Error(errorMsg)
     }
-    return data
+    return data;
 }
 
 const deleteTransaction = async (transaction) => {
@@ -39,8 +51,9 @@ const deleteTransaction = async (transaction) => {
         const errorMsg = data?.message
         throw new Error(errorMsg)
     }
-    return data
+    return data;
 }
 
-const service = { getTransactions, updateTransaction, deleteTransaction }
+const service = { getTransactions, addTransactions, updateTransaction, deleteTransaction }
+
 export default service

@@ -8,6 +8,14 @@ export const getTransactionsAsync = createAsyncThunk(
     }
 )
 
+// takes in an array of transactions
+export const addTransactionsAsync = createAsyncThunk(
+    'transactions/addTransactions',
+    async (transaction) => {
+        return await TransactionService.addTransactions(transaction)
+    }
+)
+
 export const updateTransactionAsync = createAsyncThunk(
     'transactions/updateTransaction',
     async (transaction) => {
