@@ -55,11 +55,11 @@ export default function DashBoardPage() {
   ];
 
   const pieData = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-    { name: 'Group E', value: 278 },
+    { name: 'Grocery', value: 400 },
+    { name: 'Transportation', value: 300 },
+    { name: 'Entertainment', value: 300 },
+    { name: 'Food', value: 200 },
+    { name: 'Other', value: 278 },
   ];
 
   const sampleStackedData = [
@@ -82,8 +82,8 @@ export default function DashBoardPage() {
       <Grid container spacing={2}>
           <DashboardLineChart title="Money In" data={sampleData} dataKey="pv" />
           <DashboardLineChart title="Money Out" data={sampleData} dataKey="pv" />
-          <DashboardPieChart title="Title Here" data={pieData} />
-          <DashboardBarChart title="Title Here" data={sampleData} />
+          <DashboardPieChart title="Spending Categories" data={pieData} />
+          <DashboardBarChart title="Total Transactions" data={sampleData} />
           <DashboardStackedBarChart title='Daily Transactions' data={sampleStackedData}/>
       </Grid>
     </Container>
