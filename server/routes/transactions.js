@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const Transaction = require('../model/transactionModel')
+const { verifyJWTSession } = require("../utils/jwt");
+
+router.use(verifyJWTSession)
 
 // GET TRANSACTIONS
 router.get('/', function (_, res) {

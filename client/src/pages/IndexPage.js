@@ -2,12 +2,12 @@ import { Container } from "@mui/material";
 import ViewTransactionsTable from "../components/Transactions/ViewTransactionsTable";
 import AddTransactionItem from "../components/Transactions/AddTransactionItem";
 import BulkUpload from "../components/Transactions/BulkUpload";
-
+import RequireAuthentication from '../components/RequireAuthentication'
 
 function IndexPage() {
 	return (
-		<>
-			<Container>
+    <Container>
+      <RequireAuthentication>
 				<br />
 				<div style={{ display: "flex", justifyContent: "flex-end" }}>
 					<AddTransactionItem />
@@ -15,8 +15,8 @@ function IndexPage() {
 				</div>
 				<ViewTransactionsTable />
 				<br />
-			</Container>
-		</>
+      </RequireAuthentication>
+    </Container>
 	);
 }
 
