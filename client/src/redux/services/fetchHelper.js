@@ -1,10 +1,9 @@
 const ENDPOINT = "http://localhost:3001";
 
-const accesstoken = localStorage.getItem("accesstoken")
-	? localStorage.getItem("accesstoken")
-	: null;
-
 const fetchHelper = async (path, method, body) => {
+  const accesstoken = localStorage.getItem("accesstoken")
+		? localStorage.getItem("accesstoken")
+		: null;
   const response = await fetch(ENDPOINT + path, {
     method,
     headers: {

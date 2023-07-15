@@ -12,16 +12,23 @@ const DEFAULT_STATE = {
 export const usersSlice = createSlice({
 	name: "users",
 	initialState: DEFAULT_STATE,
-	reducers: {},
+	reducers: {
+		logout: (state) => {
+			console.log("Logging Out");
+			state.accesstoken = null;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(createUserAsync.fulfilled, (state, { payload }) => {
-        state.accesstoken = payload.token
+				state.accesstoken = payload.token;
 			})
 			.addCase(loginAsync.fulfilled, (state, { payload }) => {
-        state.accesstoken = payload.token
+				state.accesstoken = payload.token;
 			});
 	},
 });
+
+export const { logout } = usersSlice.actions;
 
 export default usersSlice.reducer;
