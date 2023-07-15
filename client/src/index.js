@@ -16,6 +16,7 @@ import DashBoardPage from "./pages/DashBoardPage";
 import NavBar from "./components/NavBar";
 import store from './redux/store/store.js';
 import { Provider } from 'react-redux';
+import Notification from "./components/Notification";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -32,6 +33,7 @@ root.render(
 						<Route path={"/signup"} element={<SignupPage />} />
 					</Routes>
 				</BrowserRouter>
+        <Notification />
 			</ThemeProvider>
 		</Provider>
 	</React.StrictMode>

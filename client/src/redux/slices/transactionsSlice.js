@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import data from "../../resources/data.json";
 import { v4 as uuid } from 'uuid'
 import { deleteTransactionAsync, getTransactionsAsync, addTransactionsAsync, updateTransactionAsync } from "../thunks/transactionThunk";
 
