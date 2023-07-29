@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema(
     lname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    primaryCurrency: { type: String, required: true, default: 'CAD' }
   },
   { timestamps: true }
 );
