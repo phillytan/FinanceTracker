@@ -8,8 +8,6 @@ import {
 	TableRow,
 	TableCell,
 	TableBody,
-	ListItemText,
-	ListItem
 } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { getGoalsAsync } from '../../../redux/thunks/goalThunk';
@@ -23,17 +21,6 @@ const GoalsList = () => {
 	console.log(rows);
 
   	return (
-		// <div>
-		// 	<h4>My Goals</h4>
-		// 	<List>
-		// 		{rows.map((row) => {
-		// 			<ListItem disablePadding key={row._id}>
-		// 				<ListItemText primary={row.goalDetails}>
-		// 				</ListItemText>
-		// 			</ListItem>
-		// 		})}
-		// 	</List>
-		// </div>
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
 				<TableHead>
@@ -49,10 +36,6 @@ const GoalsList = () => {
 						>
 							<TableCell>{row.goalDetails}</TableCell>
 						</TableRow>
-						// <ListItem disablePadding key={row._id}>
-						// 	<ListItemText primary={row.goalDetails}>
-						// 	</ListItemText>
-						// </ListItem>
 					))}
 				</TableBody>
 			</Table>
