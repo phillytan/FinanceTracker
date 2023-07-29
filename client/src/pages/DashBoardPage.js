@@ -78,14 +78,14 @@ export default function DashBoardPage() {
     >
       {/* todo: make the Grid sizing part of the graph components instead */}
       <Grid container spacing={2}>
-        <DashboardLineChart title="Money In" data={sampleData} dataKey="pv" />
-        <DashboardLineChart title="Money Out" data={sampleData} dataKey="pv" />
-        <DashboardPieChart title="Spending Categories" data={categoriesData} />
+        {/* <DashboardLineChart title="Money In" data={sampleData} dataKey="pv" />
+        <DashboardLineChart title="Money Out" data={sampleData} dataKey="pv" /> */}
         {/* <DashboardBarChart title="Total Transactions" data={sampleData} /> */}
         <DashboardStackedBarChart
           title="Daily Transactions"
           data={dailyTransactions}
         />
+        <DashboardPieChart title="Spending Categories" data={categoriesData} />
       </Grid>
     </Container>
   );
