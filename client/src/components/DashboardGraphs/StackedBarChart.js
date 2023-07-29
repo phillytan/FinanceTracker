@@ -15,7 +15,7 @@ const formatTooltip = (value, name) => {
 export default function DashboardStackedBarChart({ title, data }) {
 
   return (
-    <Grid item xs={6}>
+    <Grid item xs={12}>
       <Card variant={"outlined"}>
         <CardContent>
           <Typography variant={"h6"} align={"center"}>
