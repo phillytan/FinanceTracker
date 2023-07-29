@@ -17,11 +17,15 @@ router.get('/', function (req, res) {
 		});
 });
 
-// INSERT GOAL. Takes in a goal object
+// INSERT GOAL. Takes in a goal array
 router.post('/', function (req, res) {
-  const goalToAdd = req.body;
-  goalToAdd.user = req.user._id;
-  Goal.insertOne(goalToAdd)
+  const goalToAdd = req.body.map(goal => {
+    return {
+			...goal,
+			user: req.user._id
+		};
+  })
+  Goal.insertMany(goalToAdd)
   .then((newGoal) => {
     return res.status(200).send(newGoal)
   })

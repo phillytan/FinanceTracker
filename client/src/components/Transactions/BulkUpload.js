@@ -8,10 +8,6 @@ export default function BulkUpload() {
   const [transactions, setTransactions] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(transactions);
-  }, [transactions]);
-
   const handleUpload = (event) => {
     const file = event.target.files[0]
     if (file) {

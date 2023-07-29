@@ -1,6 +1,4 @@
 import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTransactionsAsync } from '../../redux/thunks/transactionThunk';
@@ -8,7 +6,8 @@ import { getTransactionsAsync } from '../../redux/thunks/transactionThunk';
 const Summary = () => {
     const styles = {
         summary: {
-            fontSize: 25
+            "fontSize": 25,
+			"paddingRight": 125
         }
     };
 	const rows = useSelector((state) => state.transactions.transactions);
@@ -25,10 +24,10 @@ const Summary = () => {
     let totalSavings = 0;
 
   	return (
-        <List>
-            <ListItem style={styles.summary}>Total Spending (CAD): ${totalSpendings}</ListItem>
-            <ListItem style={styles.summary}>Total Savings (CAD): ${totalSavings}</ListItem>
-        </List>
+		<div style={{ display: "flex", justifyContent: "flex-end" }}>
+			<p style={styles.summary}>Total Spending (CAD): ${totalSpendings}</p>
+			<p style={styles.summary}>Total Savings (CAD): ${totalSavings}</p>
+		</div>
 		// <TableContainer component={Paper}>
 		// 	<Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
 		// 		<TableHead>

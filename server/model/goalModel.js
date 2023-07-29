@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // create a schema
 const budgetGoalSchema = new mongoose.Schema(
     {
-        description: { type: String, required: true },
+        goalDetails: { type: String, required: true },
         completed: { type: Boolean, required: true },
         user: { type: mongoose.Schema.Types.ObjectId, ref: "user" }
     },

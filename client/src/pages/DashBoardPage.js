@@ -7,6 +7,7 @@ import DashboardStackedBarChart from "../components/Dashboard/DashboardGraphs/St
 import Summary from "../components/Dashboard/Summary";
 import GoalsList from "../components/Dashboard/Goals/ViewGoalsList";
 import Grid from '@mui/material/Grid';
+import AddGoalItem from "../components/Dashboard/Goals/AddGoalItem";
 /**
  * Component for the dashboard page
  */
@@ -89,6 +90,7 @@ export default function DashBoardPage() {
           <DashboardStackedBarChart title='Daily Transactions' data={sampleStackedData}/>
       </Grid>
       <Summary />
+			<AddGoalItem />
       <GoalsList />
     </Container>
   );
