@@ -14,7 +14,6 @@ const fetchHelper = async (path, method, body) => {
 		[method.toUpperCase() !== "GET" ? "body" : undefined]: JSON.stringify(body),
 	});
 	const data = await response.json();
-	console.log(data);
 	if (!response.ok) {
 		global.setNotification("error", data.message);
 		throw new Error(data.message);

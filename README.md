@@ -1,8 +1,7 @@
 # FinanceTracker
 ## Project Description
-This project is for any individual who wants to track their spending activities. It will act as a tool to help users manage their
-personal finances. Transactions made by the user will be stored and the user will be able to add, delete, update these transactions. Different statistics about the transactions will also be shown to the user.
-Some additional functionalities we may add include a forex and crypto tracker, transaction category predictions, and future spending predictions.
+
+This is a Finance Tracker App acting as a tool to help users manage their personal finances. Transactions made by the user are stored and the user will be able to create, delete, and update these transactions. Different statistics about the transactions will also be shown to the user with further additional functionalities such as forex and crypto assets trackers, transaction category predictions, and future spending predictions.
 
 ## Project task requirements
 - Minimal requirements

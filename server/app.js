@@ -8,6 +8,7 @@ var connectMongoDB = require('./db/dbConn');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var transactionsRouter = require('./routes/transactions');
+var goalsRouter = require('./routes/goals');
 
 var app = express();
 
@@ -23,5 +24,6 @@ connectMongoDB();
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/transactions', transactionsRouter);
+app.use('/goals', goalsRouter);
 
 module.exports = app;

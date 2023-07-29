@@ -34,7 +34,6 @@ export const transactionsSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(getTransactionsAsync.fulfilled, (state, action) => {
-				console.log('payload:', action.payload)
 				state.transactions = action.payload
 			})
 			.addCase(addTransactionsAsync.fulfilled, (state, action) => {

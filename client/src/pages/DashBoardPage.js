@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import Container from "@mui/material/Container";
-import DashboardBarChart from "../components/DashboardGraphs/BarChart";
-import DashboardLineChart from "../components/DashboardGraphs/LineChart";
-import DashboardPieChart from "../components/DashboardGraphs/PieChart";
-import DashboardStackedBarChart from "../components/DashboardGraphs/StackedBarChart";
-import Grid from "@mui/material/Grid";
+import DashboardPieChart from "../components/Dashboard/DashboardGraphs/PieChart";
+import DashboardStackedBarChart from "../components/Dashboard/DashboardGraphs/StackedBarChart";
+import Summary from "../components/Dashboard/Summary";
+import GoalsList from "../components/Dashboard/Goals/ViewGoalsList";
+import Grid from '@mui/material/Grid';
+import AddGoalItem from "../components/Dashboard/Goals/AddGoalItem";
 import { useSelector } from "react-redux";
 import { useTransactionCategories } from "../hooks/useTransactionCategories";
 import { useDailyTransactions } from "../hooks/useDailyTransactions";
@@ -87,6 +88,9 @@ export default function DashBoardPage() {
         />
         <DashboardPieChart title="Spending Categories" data={categoriesData} />
       </Grid>
+      <Summary />
+			<AddGoalItem />
+      <GoalsList />
     </Container>
   );
 }
