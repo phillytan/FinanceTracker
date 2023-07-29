@@ -14,14 +14,14 @@ import { getTransactionsAsync } from "../redux/thunks/transactionThunk";
  * Component for the dashboard page
  */
 export default function DashBoardPage() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getTransactionsAsync())
-	}, [dispatch])
+  useEffect(() => {
+    dispatch(getTransactionsAsync());
+  }, [dispatch]);
   const transactions = useSelector((state) => state.transactions.transactions);
-  const { categoriesData } = useTransactionCategories(transactions)
-  const { dailyTransactions } = useDailyTransactions(transactions)
+  const { categoriesData } = useTransactionCategories(transactions);
+  const { dailyTransactions } = useDailyTransactions(transactions);
 
   const sampleData = [
     {
@@ -68,13 +68,12 @@ export default function DashBoardPage() {
     },
   ];
 
-
   return (
     <Container
       component="main"
       sx={{
         paddingTop: "30px",
-        pb: 2
+        pb: 2,
       }}
     >
       {/* todo: make the Grid sizing part of the graph components instead */}

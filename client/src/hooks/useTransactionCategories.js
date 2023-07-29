@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { roundToTwoDecimals } from "../utils/math";
 import { getExchangeRates } from "../utils/currency";
+import { getDateOfLastMonth } from "../utils/date";
 
 const useTransactionCategories = (transactions) => {
   const [recentTransactions, setRecentTransactions] = useState([]);
@@ -9,8 +10,7 @@ const useTransactionCategories = (transactions) => {
 
   useEffect(() => {
     const currentDate = new Date();
-    const oneMonthAgo = new Date(currentDate);
-    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    const oneMonthAgo = getDateOfLastMonth(currentDate);
     const recent = transactions.filter((transaction) => {
       const transactionDate = new Date(transaction.date);
       return oneMonthAgo <= transactionDate && transactionDate <= currentDate;
