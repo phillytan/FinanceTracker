@@ -1,9 +1,11 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
-import DashboardBarChart from "../components/DashboardGraphs/BarChart";
-import DashboardLineChart from "../components/DashboardGraphs/LineChart";
-import DashboardPieChart from "../components/DashboardGraphs/PieChart";
-import DashboardStackedBarChart from "../components/DashboardGraphs/StackedBarChart";
+import DashboardBarChart from "../components/Dashboard/DashboardGraphs/BarChart";
+import DashboardLineChart from "../components/Dashboard/DashboardGraphs/LineChart";
+import DashboardPieChart from "../components/Dashboard/DashboardGraphs/PieChart";
+import DashboardStackedBarChart from "../components/Dashboard/DashboardGraphs/StackedBarChart";
+import Summary from "../components/Dashboard/Summary";
+import GoalsList from "../components/Dashboard/Goals/ViewGoalsList";
 import Grid from '@mui/material/Grid';
 /**
  * Component for the dashboard page
@@ -86,6 +88,8 @@ export default function DashBoardPage() {
           <DashboardBarChart title="Total Transactions" data={sampleData} />
           <DashboardStackedBarChart title='Daily Transactions' data={sampleStackedData}/>
       </Grid>
+      <Summary />
+      <GoalsList />
     </Container>
   );
 }
