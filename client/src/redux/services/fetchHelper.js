@@ -1,5 +1,5 @@
-// const ENDPOINT = "https://financetracker-backend.onrender.com";
-const ENDPOINT = "http://localhost:3001";
+const ENDPOINT = "https://financetracker-backend.onrender.com";
+// const ENDPOINT = "http://localhost:3001";
 
 const fetchHelper = async (path, method, body) => {
 	const accesstoken = localStorage.getItem("accesstoken")
