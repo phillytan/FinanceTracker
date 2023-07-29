@@ -3,7 +3,6 @@ import { Alert, AlertTitle } from '@mui/material'
 
 const RequireAuthentication = ({ children }) => {
 	const accesstoken = useSelector((state) => state.users.accesstoken);
-  console.log(accesstoken)
   if (!accesstoken) {
     return (
       <>
