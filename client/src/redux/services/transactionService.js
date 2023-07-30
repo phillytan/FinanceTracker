@@ -5,6 +5,11 @@ const getTransactions = async () => {
   return data;
 };
 
+const getTopCategories = async () => {
+  const data = await fetchHelper("/transactions/topCategories", "GET", {});
+  return data;
+};
+
 const addTransactions = async (transactions) => {
   const data = await fetchHelper("/transactions", "POST", transactions);
   return data;
@@ -28,6 +33,6 @@ const deleteTransaction = async (transaction) => {
   return data;
 }
 
-const service = { getTransactions, addTransactions, updateTransaction, deleteTransaction }
+const service = { getTransactions, getTopCategories, addTransactions, updateTransaction, deleteTransaction }
 
 export default service

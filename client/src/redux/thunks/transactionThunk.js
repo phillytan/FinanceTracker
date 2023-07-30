@@ -8,6 +8,13 @@ export const getTransactionsAsync = createAsyncThunk(
     }
 )
 
+export const getTopCategoriesAsync = createAsyncThunk(
+    'transactions/getTopCategories',
+    async () => {
+        return await TransactionService.getTopCategories()
+    }
+)
+
 // takes in an array of transactions
 export const addTransactionsAsync = createAsyncThunk(
     'transactions/addTransactions',
