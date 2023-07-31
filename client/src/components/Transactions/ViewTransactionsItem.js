@@ -23,10 +23,10 @@ const dialogTheme = {
 
     '& .MuiDialogActions-root': {
         padding: '15px',
-        'margin-top': '5px'
+        'marginTop': '5px'
     },
     '& .MuiDialog-paper': {
-        "min-width": "60%",
+        "minWidth": "60%",
     },
 
 
