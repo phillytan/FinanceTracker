@@ -24,8 +24,10 @@ router.get('/spending-predictions', function (req, res) {
             total: sum,
             categories: data
         }
+        console.log(JSON.stringify(result))
         return res.status(200).send(result);
     })
+    .catch((error) => {console.log(error)});
 });
 
 // returns a promise
