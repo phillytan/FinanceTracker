@@ -12,7 +12,7 @@ router.use(verifyJWTSession)
 // GET spending predictions
 router.get('/spending-predictions', function (req, res) {
     const transactionTypes = ["Grocery",
-    //  "Transportation", "Entertainment", "Food", "Other"
+     "Transportation", "Entertainment", "Food", "Other"
     ];
 
     let sum = 0;
