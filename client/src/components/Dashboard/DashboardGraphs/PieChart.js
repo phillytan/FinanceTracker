@@ -11,8 +11,7 @@ import Grid from '@mui/material/Grid';
  */
 export default function App(props) {
     return (
-        <Grid item xs={4}>
-
+        <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
             <Card variant={'outlined'}>
                 <CardContent>
                     <Typography variant={'h6'} align={'center'}>{props.title}</Typography>

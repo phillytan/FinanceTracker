@@ -33,15 +33,17 @@ export default function DashBoardPage() {
         pb: 2,
       }}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={2} >
         <DashboardStackedBarChart
           title="Daily Transactions"
           data={dailyTransactions}
         />
         <DashboardPieChart title="Spending Categories" data={categoriesData} />
+        <Summary />
         <DashboardEstimatedSpending></DashboardEstimatedSpending>
+        
       </Grid>
-      <Summary />
+      
 			<AddGoalItem />
       <GoalsList />
     </Container>
