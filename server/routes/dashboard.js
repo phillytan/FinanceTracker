@@ -43,13 +43,11 @@ async function getPredictionOfCategory(csv) {
     });
 
     child.stderr.on("data", (data) => {
-        // console.log(`stderr: ${data}`);
+        console.log(`stderr: ${data}`);
     });
 
     return await new Promise((resolve) => {
         child.on('close', (code) => {
-            // console.log(`child process close all stdio with code ${code}`);
-            // console.log(`exited python script with: ` + sesOutput);
             resolve(sesOutput);
         })
     })

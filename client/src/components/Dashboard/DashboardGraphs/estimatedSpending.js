@@ -16,9 +16,9 @@ export default function App(props) {
             "fontSize": 20,
             "width": "-webkit-fill-available",
             "margin": "5px 15px 5px 15px",
-            'font-family': '"Roboto","Helvetica","Arial","sans-serif"',
-            'font-weight': '500',
-            'font-size': '1.25rem'
+            'fontFamily': '"Roboto","Helvetica","Arial","sans-serif"',
+            'fontWeight': '500',
+            'fontSize': '1.25rem'
         },
         value: {
             "fontSize": 15,

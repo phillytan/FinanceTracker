@@ -15,8 +15,8 @@ const Summary = () => {
 		grid: {
 			'height': "345px",
 			'display': 'flex',
-			'flex-direction': 'column',
-			'justify-content': 'space-between',
+			'flexDirection': 'column',
+			'justifyContent': 'space-between',
 		},
 		card: {
 			"padding" : "4px 0",
