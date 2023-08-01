@@ -11,7 +11,9 @@ router.use(verifyJWTSession)
 
 // GET spending predictions
 router.get('/spending-predictions', function (req, res) {
-    const transactionTypes = ["Grocery", "Transportation", "Entertainment", "Food", "Other"];
+    const transactionTypes = ["Grocery",
+    //  "Transportation", "Entertainment", "Food", "Other"
+    ];
 
     let sum = 0;
     Promise.all(transactionTypes.map(async (type) => {
@@ -40,13 +42,13 @@ async function getPredictionOfCategory(csv) {
     });
 
     child.stderr.on("data", (data) => {
-        // console.log(`stderr: ${data}`);
+        console.log(`stderr: ${data}`);
     });
 
     return await new Promise((resolve) => {
         child.on('close', (code) => {
-            // console.log(`child process close all stdio with code ${code}`);
-            // console.log(`exited python script with: ` + sesOutput);
+            console.log(`child process close all stdio with code ${code}`);
+            console.log(`exited python script with: ` + sesOutput);
             resolve(sesOutput);
         })
     })
