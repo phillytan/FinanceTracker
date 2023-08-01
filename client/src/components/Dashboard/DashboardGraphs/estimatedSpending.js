@@ -35,7 +35,7 @@ export default function App(props) {
 
     return (
         <Grid item xs={4}  >
-            <Card variant={'outlined'} style={{height: "328px"}}>
+            <Card variant={'outlined'}>
                 <CardContent width={"100%"}>
                     <h5>Estimated spending this month</h5>
                         <p>$ {predictions.total}</p>
