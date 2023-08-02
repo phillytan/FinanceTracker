@@ -4,55 +4,44 @@ const { verifyJWTSession } = require("../utils/jwt");
 
 const Transaction = require('../model/transactionModel')
 
-var spawn = require('child_process').spawn;
 
 
 router.use(verifyJWTSession)
 
 // GET spending predictions
 router.get('/spending-predictions/:category', function (req, res) {
+    const ARIMA = require('arima')
+    let options = {
+        p: 0,
+        d: 1,
+        q: 1,
+        verbose:false
+    }
+
     let current = new Date('2023-01-01');
-    current.setFullYear((new Date()).getFullYear()); 
-    current.setMonth((new Date()).getMonth()); 
+    current.setFullYear((new Date()).getFullYear());
+    current.setMonth((new Date()).getMonth());
 
     let previous = new Date();
-    previous.setFullYear(previous.getFullYear() - 1); 
+    previous.setFullYear(previous.getFullYear() - 1);
     previous.setDate(1);
 
     let filter = {
         user: req.user._id,
         transactionType: req.params.category,
-        date: { $gte: previous,$lt: current}
+        date: { $gte: previous, $lt: current }
     }
-
     getSummaryOfLast12Months(filter)
-        .then(async (csv) => {
-            let result = await getPredictionOfCategory(csv);
-            return res.status(200).send(result);
-        })
-        .catch((e) => console.log(e))
-});
+    .then(async (ts) => {
+        const arima = new ARIMA(options).train(ts)
+        const [pred] = arima.predict(10)
 
-// returns a promise
-async function getPredictionOfCategory(csv) {
-    var child = spawn('python', ["utils/ses.py", csv]);
-
-    let sesOutput;
-    child.stdout.on('data', function (data) {
-        sesOutput = data.toString().replace(/\s/g, '');
-    });
-
-    child.stderr.on("data", (data) => {
-        console.log(`stderr: ${data}`);
-    });
-
-    return await new Promise((resolve) => {
-        child.on('close', (code) => {
-            resolve(sesOutput);
-        })
+        let alpha = 0.3;
+        let final = (alpha) * (ts[ts.length-1]) + (1-alpha)*(pred[0])
+        return res.status(200).send(final.toString());
     })
-
-}
+    .catch((e) => console.log(e))
+});
 
 async function getSummaryOfLast12Months(filter) {
 
@@ -77,11 +66,9 @@ async function getSummaryOfLast12Months(filter) {
         }
     ])
         .then((res) => {
-            let csv = "sum";
-            res.forEach((row) => {
-                csv = csv + "\n" + row.sum
+            return res.map((row) => {
+                return row.sum;
             })
-            return csv;
         });
 
 }
