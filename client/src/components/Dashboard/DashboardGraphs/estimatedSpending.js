@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent} from "@mui/material";
 import Grid from '@mui/material/Grid';
 import { useSelector, useDispatch } from "react-redux";
 import { getSpendingPredictionsAsync } from "../../../redux/thunks/dashboardThunk";
@@ -29,7 +29,7 @@ export default function App(props) {
     let predictions = useSelector((state) => state.dashboard.predictedSpendings);
 
     let categoriesPrinted = predictions.categories.map(category => {
-        return <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", flexWrap: "wrap", width: "-webkit-fill-available" }}>
+        return <div key={category.name} style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", flexWrap: "wrap", width: "-webkit-fill-available" }}>
                 <p style={styles.value}>{category.name} : </p>
                 <p style={styles.value}>${category.prediction.toFixed(2)}</p>
         </div>
