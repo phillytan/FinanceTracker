@@ -15,7 +15,7 @@ router.get('/spending-predictions/:category', function (req, res) {
         p: 0,
         d: 1,
         q: 1,
-        verbose:false
+        verbose: false
     }
 
     let current = new Date('2023-01-01');
@@ -32,18 +32,23 @@ router.get('/spending-predictions/:category', function (req, res) {
         date: { $gte: previous, $lt: current }
     }
     getSummaryOfLast12Months(filter)
-    .then(async (ts) => {
-        const arima = new ARIMA(options).train(ts)
-        const [pred] = arima.predict(10)
+        .then(async (ts) => {
+            const arima = new ARIMA(options).train(ts)
+            const [pred] = arima.predict(1)
 
-        let alpha = 0.3;
-        let final = (alpha) * (ts[ts.length-1]) + (1-alpha)*(pred[0])
-        return res.status(200).send(final.toString());
-    })
-    .catch((e) => console.log(e))
+            let alpha = 0.3;
+            let final = (alpha) * (ts[ts.length - 1]) + (1 - alpha) * (pred[0])
+            return res.status(200).send(final.toString());
+        })
+        .catch((e) => {
+            console.log(e)
+            return res.status(200).send("0");
+        })
 });
 
 async function getSummaryOfLast12Months(filter) {
+    const month = new Date().getMonth() + 1;
+    let results = Array(12).fill(0)
 
     return Transaction.aggregate([
         {
@@ -66,9 +71,17 @@ async function getSummaryOfLast12Months(filter) {
         }
     ])
         .then((res) => {
-            return res.map((row) => {
+            if(res.length === 0) return results;
+
+            res.forEach((row) => {
+                results[((row._id.month) - month + 12) % 12] = row.sum;
                 return row.sum;
             })
+
+            while (results[0] === 0) {
+                results.shift()
+            }
+            return results;
         });
 
 }
