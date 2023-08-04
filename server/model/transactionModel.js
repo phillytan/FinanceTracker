@@ -5,6 +5,7 @@ const transactionSchema = new mongoose.Schema(
     {
         merchantName: { type: String, required: false },
         amount: { type: Number, required: true },
+        amountInCAD: { type: Number, required: false },
         address: { type: String, required: false },
         date: { type: Date, required: true },
         transactionType: { type: String, required: true },

@@ -60,7 +60,7 @@ async function getSummaryOfLast12Months(filter) {
                     month: { $month: "$date" },
                     year: { $year: "$date" }
                 },
-                sum: { $sum: "$amount" },
+                sum: { $sum: "$amountInCAD" },
             }
         },
         {

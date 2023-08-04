@@ -37,7 +37,7 @@ const dialogTheme = {
  */
 const DialogHeadings = {
     fontWeight: 'bold',
-    "margin-top": '20px'
+    "marginTop": '20px'
 }
 
 
