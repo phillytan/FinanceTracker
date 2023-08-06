@@ -23,24 +23,22 @@ export default function BulkUpload() {
   const mapData = (data) => {
     const mappedData = uploadData.map((transaction) => {
       return {
-        merchantName: transaction[data.merchantName],
+        ...(data.merchantName ? {merchantName: transaction[data.merchantName]} : {}),
         amount: transaction[data.amount],
-        address: transaction[data.address],
+        ...(data.address ? {address: transaction[data.address]} : {}),
         date: transaction[data.date],
         transactionType: transaction[data.transactionType],
         currency: transaction[data.currency],
         paymentMethod: transaction[data.paymentMethod],
-        description: transaction[data.description],
+        ...(data.description ? {description: transaction[data.description]} : {}),
       };
     });
-
     let cleanData = filterFutureDates(mappedData);
     if (cleanData.length < mappedData.length) {
       setOpen(true);
     }
     dispatch(addTransactionsAsync(cleanData));
-    fileInputRef.current.value = ''
-  }
+  };
 
   const handleUpload = (event) => {
     const file = event.target.files[0];
@@ -74,6 +72,11 @@ export default function BulkUpload() {
     return cleanData;
   }
 
+  const onCloseTransactionMappingModal = () => {
+    setMappingModal(false);
+    fileInputRef.current.value = "";
+  };
+
   return (
     <div style={{ marginLeft: "5px" }}>
       <Dialog open={open} onClose={closeMessage} maxWidth="md">
@@ -92,14 +95,20 @@ export default function BulkUpload() {
       {mappingModal && (
         <TransactionMappingModal
           open={mappingModal}
-          onClose={() => setMappingModal(false)}
+          onClose={onCloseTransactionMappingModal}
           fields={uploadData[0] ? Object.keys(uploadData[0]) : []}
           mapData={mapData}
         />
       )}
       <Button variant="outlined" component="label">
         Bulk upload
-        <input ref={fileInputRef} type="file" hidden accept=".csv" onChange={handleUpload} />
+        <input
+          ref={fileInputRef}
+          type="file"
+          hidden
+          accept=".csv"
+          onChange={handleUpload}
+        />
       </Button>
     </div>
   );

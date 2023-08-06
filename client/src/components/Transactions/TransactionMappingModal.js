@@ -5,12 +5,14 @@ import {
   Button,
   DialogContent,
   IconButton,
-  Box
+  Box,
+  DialogContentText,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { FormProvider, useForm } from "react-hook-form";
-import ReactHookFormSelect from "./ReactHookFormSelect";
-import { useEffect } from "react";
+import FieldSelect from "./FieldSelect";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const TRANSACTION_FIELDS = [
   "merchantName",
@@ -23,6 +25,17 @@ const TRANSACTION_FIELDS = [
   "description",
 ];
 
+const transactionMappingSchema = z.object({
+  merchantName: z.string(),
+  amount: z.string().min(1, { message: "Mapping required for amount" }),
+  address: z.string(),
+  date: z.string().min(1, "Mapping required for date"),
+  transactionType: z.string().min(1, "Mapping required for transaction type"),
+  currency: z.string().min(1, "Mapping required for currency"),
+  paymentMethod: z.string().min(1, "Mapping required for payment method"),
+  description: z.string(),
+});
+
 export default function TransactionMappingModal({
   open,
   onClose,
@@ -31,6 +44,7 @@ export default function TransactionMappingModal({
 }) {
   console.log(fields, fields.includes("merchantName"));
   const formState = useForm({
+    resolver: zodResolver(transactionMappingSchema),
     defaultValues: {
       merchantName: fields.includes("merchantName") ? "merchantName" : "",
       amount: fields.includes("amount") ? "amount" : "",
@@ -43,15 +57,20 @@ export default function TransactionMappingModal({
       paymentMethod: fields.includes("paymentMethod") ? "paymentMethod" : "",
       description: fields.includes("description") ? "description" : "",
     },
+    mode: "onTouched",
   });
-  const { control, handleSubmit, watch } = formState;
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid },
+  } = formState;
 
   const onValid = (data) => {
     mapData(data);
   };
 
-  const onInvalid = () => {
-    console.log("invalid");
+  const onInvalid = (error) => {
+    global.setNotification('error', error)
   };
 
   const onSubmit = handleSubmit(onValid, onInvalid);
@@ -59,6 +78,7 @@ export default function TransactionMappingModal({
   const onContinue = () => {
     onSubmit();
     onClose();
+    global.setNotification('success', 'Your transactions have been added.')
   };
   return (
     <Dialog open={open} fullWidth onClose={onClose}>
@@ -68,21 +88,24 @@ export default function TransactionMappingModal({
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            alignItems: 'center'
+            alignItems: "center",
           }}
         >
-          <DialogTitle variant="h4">Choose your fields</DialogTitle>
+          <DialogTitle>Map your fields</DialogTitle>
           <IconButton onClick={onClose}>
             <CloseIcon fontSize="small" />
           </IconButton>
         </Box>
+        <DialogContentText>
+          Choose the columns from your CSV file to be mapped to each field.
+        </DialogContentText>
         <FormProvider {...formState}>
           <form
             style={{ display: "flex", flexDirection: "column" }}
             onSubmit={onContinue}
           >
             {TRANSACTION_FIELDS.map((field) => (
-              <ReactHookFormSelect
+              <FieldSelect
                 key={field}
                 name={field}
                 label={field}
@@ -93,7 +116,9 @@ export default function TransactionMappingModal({
               />
             ))}
             <DialogActions>
-              <Button type="submit">Continue</Button>
+              <Button type="submit" disabled={!isValid}>
+                Continue
+              </Button>
             </DialogActions>
           </form>
         </FormProvider>
