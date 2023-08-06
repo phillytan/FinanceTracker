@@ -78,9 +78,10 @@ async function getSummaryOfLast12Months(filter) {
                 return row.sum;
             })
 
-            while (results[0] === 0) {
+            while (results.length > 1 && results[0] === 0) {
                 results.shift()
             }
+            console.log(results)
             return results;
         });
 
