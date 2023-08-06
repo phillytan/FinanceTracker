@@ -18,12 +18,20 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/topCategories', function (req, res) {
+router.get('/topCategories/:startDate/:endDate', function (req, res) {
   const userId = new mongoose.Types.ObjectId(req.user._id);
+  const startDate = req.params.startDate;
+  const endDate = req.params.endDate;
+
+  console.log(startDate, endDate);
   Transaction.aggregate([
     {
       $match: {
-        user: userId
+        user: userId,
+        date: {
+          $gte: new Date(startDate),
+          $lte: new Date(endDate)
+        }
       }
     },
     {
@@ -42,13 +50,13 @@ router.get('/topCategories', function (req, res) {
       $limit: 3
     }
   ])
-  .then((result) => {
-    return res.json(result);
-  })
-  .catch((error) => {
-    console.error(error);
-    return res.status(400).send(error);
-  });
+    .then((result) => {
+      return res.json(result);
+    })
+    .catch((error) => {
+      console.error(error);
+      return res.status(400).send(error);
+    });
 })
 
 // INSERT TRANSACTIONS. Takes in an array of transactions

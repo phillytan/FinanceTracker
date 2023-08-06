@@ -5,8 +5,10 @@ const getTransactions = async () => {
   return data;
 };
 
-const getTopCategories = async () => {
-  const data = await fetchHelper("/transactions/topCategories", "GET", {});
+const getTopCategories = async ({startDate, endDate}) => {
+  console.log("service" + startDate, endDate);
+  const data = await fetchHelper(
+    `/transactions/topCategories/${startDate}/${endDate}`, "GET", {});
   return data;
 };
 

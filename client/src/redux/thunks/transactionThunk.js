@@ -10,8 +10,8 @@ export const getTransactionsAsync = createAsyncThunk(
 
 export const getTopCategoriesAsync = createAsyncThunk(
     'transactions/getTopCategories',
-    async () => {
-        return await TransactionService.getTopCategories()
+    async ({ startDate, endDate }) => {
+        return await TransactionService.getTopCategories({ startDate, endDate })
     }
 )
 
