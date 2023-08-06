@@ -28,6 +28,7 @@ const default_state = {
 
 export default function AddTransactionItem() {
     const [open, setOpen] = React.useState(false);
+    const [openError, setOpenError] = React.useState(false);
     const [transaction, setTransaction] = React.useState(default_state);
     const dispatch = useDispatch();
 
@@ -39,8 +40,13 @@ export default function AddTransactionItem() {
     }
 
     const resetFields = () => {
+        setOpenError(false);
         setOpen(false);
         setTransaction(default_state);
+    }
+
+    const closeErrorMessage = () => {
+        setOpenError(false);
     }
 
     const handleClickOpen = () => {
@@ -48,6 +54,12 @@ export default function AddTransactionItem() {
     };
 
     const handleAdd = () => {
+        let today = new Date();
+        let transactionDate = new Date(transaction.date);
+        if (transactionDate > today) {
+            setOpenError(true);
+            return;
+        }
         if (transaction.merchantName && transaction.amount && transaction.address && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
             dispatch(addTransactionsAsync([transaction]));
             resetFields();
@@ -59,6 +71,17 @@ export default function AddTransactionItem() {
             <Button variant="outlined" onClick={handleClickOpen}>
                 Add Transaction
             </Button>
+            <Dialog open={openError} onClose={closeErrorMessage} maxWidth="md">
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent >
+                    <DialogContentText>
+                        Please ensure the transaction date is no later than today's date.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={closeErrorMessage}>Continue</Button>
+                </DialogActions>
+            </Dialog>
             <Dialog open={open} onClose={resetFields} maxWidth="md">
                 <DialogTitle>Add Transaction</DialogTitle>
                 <DialogContent >
