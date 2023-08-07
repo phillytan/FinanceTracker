@@ -4,7 +4,7 @@ import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recha
 import Grid from '@mui/material/Grid';
 
 
-const formatTooltip = (value, name) => {
+export const formatTooltip = (value, name) => {
   return [`${name}: $${value}`]
 }
 /**
