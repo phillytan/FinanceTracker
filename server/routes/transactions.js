@@ -57,7 +57,6 @@ router.get('/topCategories/:startDate/:endDate', function (req, res) {
     }
   ])
     .then((result) => {
-      console.log(result)
       return res.json(result);
     })
     .catch((error) => {
