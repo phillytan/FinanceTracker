@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Container from "@mui/material/Container";
 import DashboardPieChart from "../components/Dashboard/DashboardGraphs/PieChart";
 import DashboardStackedBarChart from "../components/Dashboard/DashboardGraphs/StackedBarChart";
+import DashboardEstimatedSpending from "../components/Dashboard/DashboardGraphs/estimatedSpending";
 import Summary from "../components/Dashboard/Summary";
 import GoalsList from "../components/Dashboard/Goals/ViewGoalsList";
 import Grid from '@mui/material/Grid';
@@ -33,18 +34,17 @@ export default function DashBoardPage() {
         pb: 2,
       }}
     >
-      {/* todo: make the Grid sizing part of the graph components instead */}
-      <Grid container spacing={2}>
-        {/* <DashboardLineChart title="Money In" data={sampleData} dataKey="pv" />
-        <DashboardLineChart title="Money Out" data={sampleData} dataKey="pv" /> */}
-        {/* <DashboardBarChart title="Total Transactions" data={sampleData} /> */}
+      <Grid container spacing={2} >
         <DashboardStackedBarChart
           title="Daily Transactions"
           data={dailyTransactions}
         />
         <DashboardPieChart title="Spending Categories" data={categoriesData} />
+        <Summary />
+        <DashboardEstimatedSpending></DashboardEstimatedSpending>
+        
       </Grid>
-      <Summary />
+      
 			<AddGoalItem />
       <GoalsList />
       <TopTransactionCategories />

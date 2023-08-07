@@ -14,18 +14,18 @@ export const transactionsSlice = createSlice({
 	initialState: DEFAULT_STATE,
 	reducers: {
 		addTransaction: (state, action) => {
-			console.log("Adding transaction " + action.payload);
+			// console.log("Adding transaction " + action.payload);
 			action.payload.id = uuid();
 			state.transactions = [...state.transactions, action.payload];
 		},
 		updateTransaction: (state, action) => {
-			console.log("Updating transaction " + action.payload);
+			// console.log("Updating transaction " + action.payload);
 			state.transactions = state.transactions.map((trans) =>
 				trans.id === action.payload.id ? action.payload : trans
 			);
 		},
 		deleteTransaction: (state, action) => {
-			console.log("Deleting transaction " + Object.values(action.payload));
+			// console.log("Deleting transaction " + Object.values(action.payload));
 			state.transactions = state.transactions.filter(
 				(trans) => trans.id !== action.payload.id
 			);
