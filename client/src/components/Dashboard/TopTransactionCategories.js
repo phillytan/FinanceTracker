@@ -50,11 +50,6 @@ const TopTransactionCategories = () => {
         dispatch(getTopCategoriesAsync({ startDate, endDate }));
     }, [timeRange])
 
-    // useEffect(() => {
-    //     dispatch(getTopCategoriesAsync())
-    // }, []);
-
-    console.log(topCategories);
     return (
         <Container>
             <br />

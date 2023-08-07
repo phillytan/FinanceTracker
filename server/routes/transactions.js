@@ -23,7 +23,6 @@ router.get('/topCategories/:startDate/:endDate', function (req, res) {
   const startDate = req.params.startDate;
   const endDate = req.params.endDate;
 
-  console.log(startDate, endDate);
   Transaction.aggregate([
     {
       $match: {
@@ -38,12 +37,12 @@ router.get('/topCategories/:startDate/:endDate', function (req, res) {
       $group: {
         _id: "$transactionType",
         count: { $sum: 1 },
-        totalAmount: { $sum: "$amount" },
+        totalAmount: { $sum: "$amountInCAD" },
       }
     },
     {
       $sort: {
-        count: -1
+        totalAmount: -1
       }
     },
     {
