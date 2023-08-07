@@ -1,8 +1,16 @@
 import React from "react";
-import { PieChart, Pie, Tooltip, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { Card, CardContent, Typography } from "@mui/material";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
+import { formatTooltip } from "./StackedBarChart";
 
+const COLOR_MAP = {
+    Grocery: "#8884d8",
+    Transportation: "#82ca9d",
+    Entertainment: "#ffc658",
+    Food: "#EF7E3B",
+    Other: "#E6314D"
+}
 /**
  * Component for displaying a bar chart
  * @param {object} props
@@ -10,29 +18,34 @@ import Grid from '@mui/material/Grid';
  * @param {list} props.data data that the chart will display
  */
 export default function App(props) {
-    return (
-        <Grid item xs={4}>
+    const renderLabel = (entry) => `$${entry.payload.value}`
 
-            <Card variant={'outlined'}>
-                <CardContent>
-                    <Typography variant={'h6'} align={'center'}>{props.title}</Typography>
-                    <ResponsiveContainer width={"100%"} height={256}>
-                        <PieChart width={150} height={40}>
-                            <Pie
-                                dataKey="value"
-                                isAnimationActive={true}
-                                data={props.data}
-                                cx={180}
-                                cy={125}
-                                outerRadius={80}
-                                fill="#8884d8"
-                                label
-                            />
-                            <Tooltip />
-                        </PieChart>
-                    </ResponsiveContainer>
-                </CardContent>
-            </Card>
-        </Grid>
-    );
+  return (
+    <Grid item xs={6}>
+      <Card variant={"outlined"}>
+        <CardContent>
+          <Typography variant={"h6"} align={"center"}>
+            {props.title}
+          </Typography>
+          <ResponsiveContainer width={"100%"} height={256}>
+            <PieChart width={150} height={40}>
+              <Pie
+                dataKey="value"
+                isAnimationActive={true}
+                data={props.data}
+                outerRadius={80}
+                fill="#8884d8"
+                label={renderLabel}
+              >
+              {props.data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLOR_MAP[entry.name]} />
+            ))}
+              </Pie>
+              <Tooltip formatter={formatTooltip}/>
+            </PieChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
+    </Grid>
+  );
 }
