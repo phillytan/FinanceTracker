@@ -18,7 +18,6 @@ const GoalsList = () => {
 		dispatch(getGoalsAsync())
 	}, [dispatch]);
 	const rows = useSelector((state) => state.goals.goals);
-	console.log(rows);
 
   	return (
 		<TableContainer component={Paper}>

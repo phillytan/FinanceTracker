@@ -16,12 +16,11 @@ const COLOR_MAP = {
  * @param {object} props
  * @param {string} props.title title of the chart
  * @param {list} props.data data that the chart will display
- */
+*/
 export default function App(props) {
-    const renderLabel = (entry) => `$${entry.payload.value}`
-
+  const renderLabel = (entry) => `$${entry.payload.value}`
   return (
-    <Grid item xs={6}>
+    <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
       <Card variant={"outlined"}>
         <CardContent>
           <Typography variant={"h6"} align={"center"}>

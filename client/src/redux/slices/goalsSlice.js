@@ -13,18 +13,18 @@ export const goalsSlice = createSlice({
 	initialState: DEFAULT_STATE,
 	reducers: {
 		addGoal: (state, action) => {
-			console.log("Adding goal " + action.payload);
+			// console.log("Adding goal " + action.payload);
 			action.payload.id = uuid();
 			state.goal = [...state.goals, action.payload];
 		},
 		updateGoal: (state, action) => {
-			console.log("Updating goal " + action.payload);
+			// console.log("Updating goal " + action.payload);
 			state.goals = state.goals.map((goal) =>
 				goal.id === action.payload.id ? action.payload : goal
 			);
 		},
 		deleteGoal: (state, action) => {
-			console.log("Deleting goal " + Object.values(action.payload));
+			// console.log("Deleting goal " + Object.values(action.payload));
 			state.goals = state.goals.filter(
 				(trans) => trans.id !== action.payload.id
 			);

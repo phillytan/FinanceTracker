@@ -4,7 +4,6 @@ import { Navigate } from "react-router-dom";
 
 const BlockAuthenticated = ({ children }) => {
 	const accesstoken = useSelector((state) => state.users.accesstoken);
-  console.log(accesstoken)
   if (accesstoken) {
     return (
 			<>
