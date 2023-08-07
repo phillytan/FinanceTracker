@@ -19,6 +19,7 @@ import { getDateString } from '../../utils/date.js';
 export default function UpdateTransactionItem(props) {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
+    const [openError, setOpenError] = React.useState(false);
     const default_state = {
         merchantName: '',
         amount: '',
@@ -39,8 +40,13 @@ export default function UpdateTransactionItem(props) {
     }
 
     const resetFields = () => {
+        setOpenError(false);
         setOpen(false);
         setTransaction(default_state);
+    }
+
+    const closeErrorMessage = () => {
+        setOpenError(false);
     }
 
     const handleClickOpen = () => {
@@ -49,6 +55,12 @@ export default function UpdateTransactionItem(props) {
     };
 
     const handleUpdate = () => {
+        let today = new Date();
+        let transactionDate = new Date(transaction.date);
+        if (transactionDate > today) {
+            setOpenError(true);
+            return;
+        }
         if (transaction.amount && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
             dispatch(updateTransactionAsync(transaction))
             resetFields();
@@ -61,6 +73,17 @@ export default function UpdateTransactionItem(props) {
             <Button onClick={handleClickOpen}>
                 Update Transaction
             </Button>
+            <Dialog open={openError} onClose={closeErrorMessage} maxWidth="md">
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent >
+                    <DialogContentText>
+                        Please ensure the transaction date is no later than today's date.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={closeErrorMessage}>Continue</Button>
+                </DialogActions>
+            </Dialog>
             <Dialog open={open} onClose={resetFields} maxWidth="md">
                 <DialogTitle>Update Transaction</DialogTitle>
                 <DialogContent >
