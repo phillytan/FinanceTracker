@@ -12,6 +12,7 @@ import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import DashBoardPage from "./pages/DashBoardPage";
+import SavingsPage from "./pages/SavingsPage";
 
 import NavBar from "./components/NavBar";
 import store from './redux/store/store.js';
@@ -29,11 +30,12 @@ root.render(
 					<Routes>
 						<Route path={"/"} element={<IndexPage />} />
 						<Route path={"/dashboard"} element={<DashBoardPage />} />
+						<Route path={"/savings"} element={<SavingsPage />} />
 						<Route path={"/login"} element={<LoginPage />} />
 						<Route path={"/signup"} element={<SignupPage />} />
 					</Routes>
 				</BrowserRouter>
-        <Notification />
+				<Notification />
 			</ThemeProvider>
 		</Provider>
 	</React.StrictMode>
