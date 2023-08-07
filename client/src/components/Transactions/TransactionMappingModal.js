@@ -42,7 +42,6 @@ export default function TransactionMappingModal({
   fields,
   mapData,
 }) {
-  console.log(fields, fields.includes("merchantName"));
   const formState = useForm({
     resolver: zodResolver(transactionMappingSchema),
     defaultValues: {
