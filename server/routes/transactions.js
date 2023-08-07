@@ -46,10 +46,18 @@ router.get('/topCategories/:startDate/:endDate', function (req, res) {
       }
     },
     {
+      $project: {
+        _id: 1,
+        count: 1,
+        totalAmount: { $round: ["$totalAmount", 2] }
+      }
+    },
+    {
       $limit: 3
     }
   ])
     .then((result) => {
+      console.log(result)
       return res.json(result);
     })
     .catch((error) => {
