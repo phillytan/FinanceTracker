@@ -12,7 +12,8 @@ import {
     DialogTitle,
     InputLabel,
     MenuItem,
-    TextField
+    TextField,
+    Autocomplete
 } from '@mui/material';
 
 const default_state = {
@@ -143,6 +144,7 @@ export default function AddTransactionItem() {
                         name="transactionType"
                         onChange={handleChange}
                         label="Transaction Type"
+                        sx={{ mb: 2 }}
                         helperText="Please select your transaction type"
                     >
                         {transactionTypes.map((transactionType) => (
@@ -151,23 +153,34 @@ export default function AddTransactionItem() {
                             </MenuItem>
                         ))}
                     </TextField>
-                    <TextField
-                        id="outlined-select-currency"
-                        select
-                        defaultValue={default_state.currency}
-                        fullWidth
-                        name="currency"
-                        onChange={handleChange}
-                        label="Currency"
-                        helperText="Please select your currency"
-                        sx={{ mb: 2 }}
-                    >
-                        {currencies.map((currency) => (
-                            <MenuItem key={currency} value={currency}>
-                                {currency}
-                            </MenuItem>
-                        ))}
-                    </TextField>
+                    <Autocomplete
+                      id="outlined-select-currency"
+                      options={currencies}
+                      autoHighlight
+                      defaultValue={currencies.find((x) => x.code === 'cad')}
+                      getOptionLabel={(option) => `${option.name} (${option.code})`}
+                      fullWidth
+                      onChange={(_, newValue) => {
+                        setTransaction({
+                          ...transaction,
+                          currency: newValue.code.toUpperCase(),
+                        });
+                      }}
+                      name="currency"
+                      sx={{ mb: 2 }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Currency"
+                          helperText="Please select your currency"
+                          fullWidth
+                          inputProps={{
+                            ...params.inputProps,
+                            autoComplete: "new-password",
+                          }}
+                        />
+                      )}
+                    />
                     <TextField
                         id="outlined-select-payment-method"
                         select

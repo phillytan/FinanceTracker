@@ -10,7 +10,8 @@ import {
     DialogTitle,
     InputLabel,
     MenuItem,
-    TextField
+    TextField,
+    Autocomplete
 } from '@mui/material';
 import { updateTransactionAsync } from '../../redux/thunks/transactionThunk';
 import { getDateString } from '../../utils/date.js';
@@ -157,23 +158,34 @@ export default function UpdateTransactionItem(props) {
                             </MenuItem>
                         ))}
                     </TextField>
-                    <TextField
-                        id="outlined-select-currency"
-                        select
-                        value={transaction.currency}
-                        fullWidth
-                        name="currency"
-                        onChange={handleChange}
-                        label="Currency"
-                        helperText="Please select your currency"
-                        sx={{ mb: 2 }}
-                    >
-                        {currencies.map((currency) => (
-                            <MenuItem key={currency} value={currency}>
-                                {currency}
-                            </MenuItem>
-                        ))}
-                    </TextField>
+                    <Autocomplete
+                      id="outlined-select-currency"
+                      options={currencies}
+                      autoHighlight
+                      defaultValue={currencies.find((x) => x.code.toUpperCase() === transaction.currency.toUpperCase())}
+                      getOptionLabel={(option) => `${option.name} (${option.code})`}
+                      fullWidth
+                      onChange={(_, newValue) => {
+                        setTransaction({
+                          ...transaction,
+                          currency: newValue.code.toUpperCase(),
+                        });
+                      }}
+                      name="currency"
+                      sx={{ mb: 2 }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Currency"
+                          helperText="Please select your currency"
+                          fullWidth
+                          inputProps={{
+                            ...params.inputProps,
+                            autoComplete: "new-password",
+                          }}
+                        />
+                      )}
+                    />
                     <TextField
                         id="outlined-select-payment-method"
                         select
