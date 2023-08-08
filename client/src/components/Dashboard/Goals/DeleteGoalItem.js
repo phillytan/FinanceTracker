@@ -8,9 +8,9 @@ import {
     DialogContentText,
     DialogTitle
 } from '@mui/material';
-import { deleteTransactionAsync } from '../../redux/thunks/transactionThunk';
+import { deleteGoalAsync } from '../../../redux/thunks/goalThunk';
 
-export default function DeleteTransactionItem(props) {
+export default function UpdateGoalItem(props) {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
 
@@ -23,7 +23,7 @@ export default function DeleteTransactionItem(props) {
     };
 
     const handleDelete = () => {
-        dispatch(deleteTransactionAsync(props.item));
+        dispatch(deleteGoalAsync(props.item));
     }
 
     return (
@@ -32,10 +32,10 @@ export default function DeleteTransactionItem(props) {
                 Delete
             </Button>
             <Dialog open={open} onClose={handleClose} maxWidth="md">
-                <DialogTitle>Delete Transaction</DialogTitle>
+                <DialogTitle>Delete Goal</DialogTitle>
                 <DialogContent >
                     <DialogContentText>
-                        Are you sure you want to delete this transaction?
+                        Are you sure you want to delete this goal?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

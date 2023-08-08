@@ -1,50 +1,61 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { addGoalAsync } from '../../../redux/thunks/goalThunk';
 import {
     Button,
+    Checkbox,
     Dialog,
     DialogActions,
     DialogContent,
     DialogContentText,
     DialogTitle,
-    TextField
+    TextField,
+    FormControlLabel
 } from '@mui/material';
+import { updateGoalAsync } from '../../../redux/thunks/goalThunk';
 
-const default_state = {
-    goalDetails: '',
-    completed: false
-}
 
-export default function AddGoalItem() {
-    const [open, setOpen] = React.useState(false);
-    const [goal, setGoal] = React.useState(default_state);
-    const [openError, setOpenError] = React.useState(false);
+export default function UpdateGoalItem(props) {
     const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(false);
+    const [openError, setOpenError] = React.useState(false);
+    const default_state = {
+        goalDetails: '',
+        completed: false
+    }
+    const [goal, setGoal] = React.useState(default_state);
+
+    const handleChange = (event) => {
+        if (event.target.name === 'completed') {
+            setGoal({
+                ...goal,
+                [event.target.name]: !(event.target.value === 'true')
+            });
+        } else {
+            setGoal({
+                ...goal,
+                [event.target.name]: event.target.value
+            });
+        }
+    }
+
+    const resetFields = () => {
+        setOpenError(false);
+        setOpen(false);
+        setGoal(default_state);
+    }
 
     const closeErrorMessage = () => {
         setOpenError(false);
     }
 
-    const handleChange = (event) => {
-        setGoal({
-            ...goal,
-            [event.target.name]: event.target.value
-        });
-    }
-
-    const resetFields = () => {
-        setOpen(false);
-        setGoal(default_state);
-    }
-
     const handleClickOpen = () => {
         setOpen(true);
+        setGoal(props.item);
     };
 
-    const handleAdd = () => {
+    const handleUpdate = () => {
         if (goal.goalDetails) {
-            dispatch(addGoalAsync([goal]));
+            dispatch(updateGoalAsync(goal))
             resetFields();
         } else {
             setOpenError(true);
@@ -53,14 +64,14 @@ export default function AddGoalItem() {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Add Goal
+            <Button onClick={handleClickOpen}>
+                Update
             </Button>
             <Dialog open={openError} onClose={closeErrorMessage} maxWidth="md">
                 <DialogTitle>Error</DialogTitle>
                 <DialogContent >
                     <DialogContentText>
-                        Please ensure the goal is not left blank.
+                        Please ensure the goal field is not empty.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -68,15 +79,16 @@ export default function AddGoalItem() {
                 </DialogActions>
             </Dialog>
             <Dialog open={open} onClose={resetFields} maxWidth="md">
-                <DialogTitle>Add Goal</DialogTitle>
-                <DialogContent >
+                <DialogTitle>Update Goal</DialogTitle>
+                <DialogContent>
                     <DialogContentText>
-                        Please enter your new financial goal below:
+                        Please enter the new goal details below:
                     </DialogContentText>
                     <TextField
                         margin="dense"
                         id="goal"
                         label="My Goal"
+                        value={goal.goalDetails}
                         type="text"
                         fullWidth
                         name="goalDetails"
@@ -84,10 +96,20 @@ export default function AddGoalItem() {
                         variant="standard"
                         sx={{ mb: 2 }}
                     />
+                    <FormControlLabel control={<Checkbox
+                        margin="dense"
+                        id="goal"
+                        checked={goal.completed}
+                        value={goal.completed}
+                        type="text"
+                        name="completed"
+                        onClick={handleChange}
+                        variant="standard"
+                    />} label={goal.completed ? "Complete" : "Incomplete"} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={resetFields}>Cancel</Button>
-                    <Button onClick={handleAdd}>Add</Button>
+                    <Button onClick={handleUpdate}>Update</Button>
                 </DialogActions>
             </Dialog>
         </div>
