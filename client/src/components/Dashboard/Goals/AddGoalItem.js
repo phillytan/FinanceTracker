@@ -19,7 +19,12 @@ const default_state = {
 export default function AddGoalItem() {
     const [open, setOpen] = React.useState(false);
     const [goal, setGoal] = React.useState(default_state);
+    const [openError, setOpenError] = React.useState(false);
     const dispatch = useDispatch();
+
+    const closeErrorMessage = () => {
+        setOpenError(false);
+    }
 
     const handleChange = (event) => {
         setGoal({
@@ -41,6 +46,8 @@ export default function AddGoalItem() {
         if (goal.goalDetails) {
             dispatch(addGoalAsync([goal]));
             resetFields();
+        } else {
+            setOpenError(true);
         }
     };
 
@@ -49,6 +56,17 @@ export default function AddGoalItem() {
             <Button variant="outlined" onClick={handleClickOpen}>
                 Add Goal
             </Button>
+            <Dialog open={openError} onClose={closeErrorMessage} maxWidth="md">
+                <DialogTitle>Error</DialogTitle>
+                <DialogContent >
+                    <DialogContentText>
+                        Please ensure the goal is not left blank.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={closeErrorMessage}>Continue</Button>
+                </DialogActions>
+            </Dialog>
             <Dialog open={open} onClose={resetFields} maxWidth="md">
                 <DialogTitle>Add Goal</DialogTitle>
                 <DialogContent >

@@ -57,6 +57,8 @@ export default function UpdateGoalItem(props) {
         if (goal.goalDetails) {
             dispatch(updateGoalAsync(goal))
             resetFields();
+        } else {
+            setOpenError(true);
         }
     };
 
@@ -69,7 +71,7 @@ export default function UpdateGoalItem(props) {
                 <DialogTitle>Error</DialogTitle>
                 <DialogContent >
                     <DialogContentText>
-                        Please ensure the goal is not blank.
+                        Please ensure the goal field is not empty.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
