@@ -21,7 +21,7 @@ export default function UpdateSavingItem(props) {
     const [open, setOpen] = React.useState(false);
     const [openError, setOpenError] = React.useState(false);
     const default_state = {
-        merchantName: '',
+        source: '',
         amount: '',
         address: '',
         date: '',
@@ -90,12 +90,12 @@ export default function UpdateSavingItem(props) {
                     </DialogContentText>
                     <TextField
                         margin="dense"
-                        id="merchantName"
+                        id="source"
                         label="Merchant Name"
-                        value={saving.merchantName}
+                        value={saving.source}
                         type="text"
                         fullWidth
-                        name="merchantName"
+                        name="source"
                         onChange={handleChange}
                         variant="standard"
                         sx={{ mb: 2 }}

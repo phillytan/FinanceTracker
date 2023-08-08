@@ -41,7 +41,7 @@ const SavingsTable = () => {
 							<TableCell component="th" scope="row">
 								{getDateString(row.date)}
 							</TableCell>
-							<TableCell>{row.merchantName}</TableCell>
+							<TableCell>{row.source}</TableCell>
 							<TableCell align="right">
 								{`${row.currency} ${row.amount}`}
 								<br />

@@ -60,7 +60,7 @@ export default function AddTransactionItem() {
             setOpenError(true);
             return;
         }
-        if (transaction.merchantName && transaction.amount && transaction.address && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
+        if (transaction.amount && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
             dispatch(addTransactionsAsync([transaction]));
             resetFields();
         }

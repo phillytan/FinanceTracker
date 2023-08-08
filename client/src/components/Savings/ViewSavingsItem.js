@@ -87,7 +87,7 @@ const SavingsItemButton = (props) => {
                         Merchant Name:
                     </Typography>
                     <Typography gutterBottom>
-                        {props.item.merchantName}
+                        {props.item.source}
                     </Typography>
 
                     <Typography sx={DialogHeadings}>
@@ -110,28 +110,12 @@ const SavingsItemButton = (props) => {
                     <Typography gutterBottom>
                         {props.item.date}
                     </Typography>
-
-                    <Typography sx={DialogHeadings}>
-                        Saving Type:
-                    </Typography>
-                    <Typography gutterBottom>
-                        {props.item.savingType}
-                    </Typography>
-
                     <Typography sx={DialogHeadings}>
                         Currency:
                     </Typography>
                     <Typography gutterBottom>
                         {props.item.currency}
                     </Typography>
-
-                    <Typography sx={DialogHeadings}>
-                        Payment Method:
-                    </Typography>
-                    <Typography gutterBottom>
-                        {props.item.paymentMethod}
-                    </Typography>
-
 
                     <Typography sx={DialogHeadings}>
                         Notes:

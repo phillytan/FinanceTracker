@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 
 const default_state = {
-    merchantName: '',
+    source: '',
     amount: '',
     address: '',
     date: '',
@@ -58,7 +58,7 @@ export default function AddSavingItem() {
             setOpenError(true);
             return;
         }
-        if (saving.merchantName && saving.amount && saving.address && saving.date && saving.currency) {
+        if (saving.source && saving.amount && saving.date && saving.currency) {
             dispatch(addSavingsAsync([saving]));
             resetFields();
         }
@@ -88,11 +88,11 @@ export default function AddSavingItem() {
                     </DialogContentText>
                     <TextField
                         margin="dense"
-                        id="merchantName"
-                        label="Merchant Name"
+                        id="source"
+                        label="Source"
                         type="text"
                         fullWidth
-                        name="merchantName"
+                        name="source"
                         onChange={handleChange}
                         variant="standard"
                         sx={{ mb: 2 }}
@@ -156,7 +156,7 @@ export default function AddSavingItem() {
                         label="Description"
                         type="text"
                         fullWidth
-                        name="description (optional)"
+                        name="description"
                         onChange={handleChange}
                         variant="standard"
                         sx={{ mb: 2 }}

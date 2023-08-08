@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // create a schema
 const savingSchema = new mongoose.Schema(
     {
-        merchantName: { type: String, required: false },
+        source: { type: String, required: false },
         amount: { type: Number, required: true },
         amountInCAD: { type: Number, required: false },
         address: { type: String, required: false },
