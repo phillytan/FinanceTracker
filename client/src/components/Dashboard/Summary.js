@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTransactionsAsync } from '../../redux/thunks/transactionThunk';
+import { getSavingsAsync } from '../../redux/thunks/savingThunk';
 
 const Summary = () => {
 	const styles = {
@@ -23,19 +24,26 @@ const Summary = () => {
 			"margin":"0"
 		}
 	};
-	const rows = useSelector((state) => state.transactions.transactions);
+	const transactions = useSelector((state) => state.transactions.transactions);
+	const savings = useSelector((state) => state.savings.savings);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(getTransactionsAsync())
+		dispatch(getTransactionsAsync());
+		dispatch(getSavingsAsync())
 	}, [dispatch]);
 
-	let totalSpendings = rows.reduce((sum, transaction) => {
-		return sum + transaction["amount"];
+	let totalSpendings = transactions.reduce((sum, transaction) => {
+		return sum + transaction["amountInCAD"];
 	}, 0);
 	totalSpendings = Math.round(totalSpendings * 100) / 100
-	let totalSavings = 0;
 
+	
+	let totalSavings = savings.reduce((sum, saving) => {
+		return sum + saving["amountInCAD"];
+	}, 0);
+	totalSavings = Math.round(totalSavings * 100) / 100
 	return (
 		<Grid item xs={12} sm={12} md={6} lg={4} xl={4}  style={styles.grid}>
 			<Card variant={'outlined'} style={styles.card}>
