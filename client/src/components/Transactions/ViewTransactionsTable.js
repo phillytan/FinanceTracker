@@ -1,22 +1,27 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Paper from '@mui/material/Paper';
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TablePagination,
+	TableRow,
+	TableSortLabel,
+	Paper
+} from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import TransactionItem from './ViewTransactionsItem';
 import { getTransactionsAsync } from '../../redux/thunks/transactionThunk';
 import { getDateString } from '../../utils/date';
+import TransactionItem from './ViewTransactionsItem';
 import ForeignTransactionIndicator from './ForeignTransactionIndicator';
 
 const TransactionsTable = () => {
 	const [sort, setSort] = useState({ field: 'date', direction: 'asc' });
 	const [sortedRows, setSortedRows] = useState([]);
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(10);
 	const rows = useSelector((state) => state.transactions.transactions);
 	const dispatch = useDispatch()
 
@@ -27,6 +32,15 @@ const TransactionsTable = () => {
 	const handleSort = (field) => {
 		const isAsc = sort.field === field && sort.direction === 'asc';
 		setSort({ field, direction: isAsc ? 'desc' : 'asc' });
+	};
+
+	const handleChangePage = (event, newPage) => {
+		setPage(newPage);
+	};
+
+	const handleChangeRowsPerPage = (event) => {
+		setRowsPerPage(parseInt(event.target.value, 10));
+		setPage(0);
 	};
 
 	useEffect(() => {
@@ -91,34 +105,44 @@ const TransactionsTable = () => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{sortedRows.map((row) => (
-						<TableRow
-							key={row._id}
-							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-						>
-							<TableCell component="th" scope="row">
-								{getDateString(row.date)}
-							</TableCell>
-							<TableCell>{row.transactionType}</TableCell>
-							<TableCell>{row.merchantName}</TableCell>
-							<TableCell>
-								{`${row.currency} ${row.amount}`}
-								<br />
-								{row.currency !== "CAD" && (
-									<ForeignTransactionIndicator
-										currency={row.currency}
-										value={row.amount}
-										date={getDateString(row.date)}
-									/>
-								)}
-							</TableCell>
-							<TableCell>
-								<TransactionItem item={row}></TransactionItem>
-							</TableCell>
-						</TableRow>
-					))}
+					{sortedRows
+						.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+							<TableRow
+								key={row._id}
+								sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+							>
+								<TableCell component="th" scope="row">
+									{getDateString(row.date)}
+								</TableCell>
+								<TableCell>{row.transactionType}</TableCell>
+								<TableCell>{row.merchantName}</TableCell>
+								<TableCell>
+									{`${row.currency} ${row.amount}`}
+									<br />
+									{row.currency !== "CAD" && (
+										<ForeignTransactionIndicator
+											currency={row.currency}
+											value={row.amount}
+											date={getDateString(row.date)}
+										/>
+									)}
+								</TableCell>
+								<TableCell>
+									<TransactionItem item={row}></TransactionItem>
+								</TableCell>
+							</TableRow>
+						))}
 				</TableBody>
 			</Table>
+			<TablePagination
+				rowsPerPageOptions={[10, 25, 50, 100]}
+				component="div"
+				count={sortedRows.length}
+				rowsPerPage={rowsPerPage}
+				page={page}
+				onPageChange={handleChangePage}
+				onRowsPerPageChange={handleChangeRowsPerPage}
+			/>
 		</TableContainer>
 	);
 }
