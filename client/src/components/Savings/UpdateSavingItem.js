@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { addTransactionsAsync } from '../../redux/thunks/transactionThunk';
-
-import { currencies, transactionTypes, paymentMethods } from '../../resources/transactionOptions.js';
+import { currencies } from '../../resources/transactionOptions.js';
 import {
     Button,
     Dialog,
@@ -12,30 +10,29 @@ import {
     DialogTitle,
     InputLabel,
     MenuItem,
-    TextField,
-    Autocomplete
+    TextField
 } from '@mui/material';
+import { updateSavingAsync } from '../../redux/thunks/savingThunk.js';
+import { getDateString } from '../../utils/date.js';
 
-const default_state = {
-    merchantName: '',
-    amount: '',
-    address: '',
-    date: '',
-    transactionType: '',
-    currency: '',
-    paymentMethod: '',
-    description: ''
-}
 
-export default function AddTransactionItem() {
+export default function UpdateSavingItem(props) {
+    const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
     const [openError, setOpenError] = React.useState(false);
-    const [transaction, setTransaction] = React.useState(default_state);
-    const dispatch = useDispatch();
+    const default_state = {
+        source: '',
+        amount: '',
+        address: '',
+        date: '',
+        currency: '',
+        description: ''
+    }
+    const [saving, setSaving] = React.useState(default_state);
 
     const handleChange = (event) => {
-        setTransaction({
-            ...transaction,
+        setSaving({
+            ...saving,
             [event.target.name]: event.target.value
         });
     }
@@ -43,7 +40,7 @@ export default function AddTransactionItem() {
     const resetFields = () => {
         setOpenError(false);
         setOpen(false);
-        setTransaction(default_state);
+        setSaving(default_state);
     }
 
     const closeErrorMessage = () => {
@@ -52,31 +49,33 @@ export default function AddTransactionItem() {
 
     const handleClickOpen = () => {
         setOpen(true);
+        setSaving(props.item);
     };
 
-    const handleAdd = () => {
+    const handleUpdate = () => {
         let today = new Date();
-        let transactionDate = new Date(transaction.date);
-        if (transactionDate > today) {
+        let savingDate = new Date(saving.date);
+        if (savingDate > today) {
             setOpenError(true);
             return;
         }
-        if (transaction.amount && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
-            dispatch(addTransactionsAsync([transaction]));
+        if (saving.amount && saving.date && saving.currency) {
+            dispatch(updateSavingAsync(saving))
             resetFields();
         }
     };
+    const dateString = saving.date ? getDateString(saving.date) : ''
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Add Transaction
+            <Button onClick={handleClickOpen}>
+                Update Saving
             </Button>
             <Dialog open={openError} onClose={closeErrorMessage} maxWidth="md">
                 <DialogTitle>Error</DialogTitle>
                 <DialogContent >
                     <DialogContentText>
-                        Please ensure the transaction date is no later than today's date.
+                        Please ensure the saving date is no later than today's date.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -84,18 +83,19 @@ export default function AddTransactionItem() {
                 </DialogActions>
             </Dialog>
             <Dialog open={open} onClose={resetFields} maxWidth="md">
-                <DialogTitle>Add Transaction</DialogTitle>
+                <DialogTitle>Update Saving</DialogTitle>
                 <DialogContent >
                     <DialogContentText>
-                        Please enter the transaction details below:
+                        Please enter the new saving details below:
                     </DialogContentText>
                     <TextField
                         margin="dense"
-                        id="merchantName"
+                        id="source"
                         label="Merchant Name"
+                        value={saving.source}
                         type="text"
                         fullWidth
-                        name="merchantName"
+                        name="source"
                         onChange={handleChange}
                         variant="standard"
                         sx={{ mb: 2 }}
@@ -104,6 +104,7 @@ export default function AddTransactionItem() {
                         margin="dense"
                         id="amount"
                         label="Amount"
+                        value={saving.amount}
                         type="number"
                         fullWidth
                         name="amount"
@@ -114,7 +115,8 @@ export default function AddTransactionItem() {
                     <TextField
                         margin="dense"
                         id="address"
-                        label="Address of Transaction"
+                        label="Address of Saving"
+                        value={saving.address}
                         type="text"
                         fullWidth
                         name="address"
@@ -129,6 +131,7 @@ export default function AddTransactionItem() {
                         autoFocus
                         margin="dense"
                         id="date"
+                        value={dateString}
                         type="date"
                         name="date"
                         fullWidth
@@ -137,64 +140,19 @@ export default function AddTransactionItem() {
                         sx={{ mb: 5 }}
                     />
                     <TextField
-                        id="outlined-select-transaction-type"
+                        id="outlined-select-currency"
                         select
-                        defaultValue={default_state.transactionType}
+                        value={saving.currency}
                         fullWidth
-                        name="transactionType"
+                        name="currency"
                         onChange={handleChange}
-                        label="Transaction Type"
-                        sx={{ mb: 2 }}
-                        helperText="Please select your transaction type"
-                    >
-                        {transactionTypes.map((transactionType) => (
-                            <MenuItem key={transactionType} value={transactionType}>
-                                {transactionType}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                    <Autocomplete
-                      id="outlined-select-currency"
-                      options={currencies}
-                      autoHighlight
-                      defaultValue={currencies.find((x) => x?.code === 'cad')}
-                      getOptionLabel={(option) => option ? `${option.name} (${option.code})` : 'None Selected'}
-                      fullWidth
-                      onChange={(_, newValue) => {
-                        setTransaction({
-                          ...transaction,
-                          currency: newValue?.code.toUpperCase(),
-                        });
-                      }}
-                      name="currency"
-                      sx={{ mb: 2 }}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          label="Currency"
-                          helperText="Please select your currency"
-                          fullWidth
-                          inputProps={{
-                            ...params.inputProps,
-                            autoComplete: "new-password",
-                          }}
-                        />
-                      )}
-                    />
-                    <TextField
-                        id="outlined-select-payment-method"
-                        select
-                        defaultValue={default_state.paymentMethod}
-                        fullWidth
-                        name="paymentMethod"
-                        onChange={handleChange}
-                        label="Payment Method"
-                        helperText="Please select the method of payment used"
+                        label="Currency"
+                        helperText="Please select your currency"
                         sx={{ mb: 2 }}
                     >
-                        {paymentMethods.map((method) => (
-                            <MenuItem key={method} value={method}>
-                                {method}
+                        {currencies.map((currency) => (
+                            <MenuItem key={currency} value={currency}>
+                                {currency}
                             </MenuItem>
                         ))}
                     </TextField>
@@ -202,6 +160,7 @@ export default function AddTransactionItem() {
                         margin="dense"
                         id="description"
                         label="Description"
+                        value={saving.description}
                         type="text"
                         fullWidth
                         name="description"
@@ -212,7 +171,7 @@ export default function AddTransactionItem() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={resetFields}>Cancel</Button>
-                    <Button onClick={handleAdd}>Add</Button>
+                    <Button onClick={handleUpdate}>Update</Button>
                 </DialogActions>
             </Dialog>
         </div>

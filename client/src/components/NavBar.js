@@ -58,6 +58,11 @@ const NavBar = () => {
 						<ListItemText>Transactions</ListItemText>
 					</ListItemButton>
 				</ListItem>
+				<ListItem key="savings" disablePadding>
+					<ListItemButton onClick={() => navigate("/savings")}>
+						<ListItemText>Savings</ListItemText>
+					</ListItemButton>
+				</ListItem>
 				{accesstoken ? (
 					<ListItem key="logout" disablePadding>
 						<ListItemButton onClick={logoutAction}>
