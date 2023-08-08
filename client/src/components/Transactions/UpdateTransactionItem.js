@@ -162,13 +162,13 @@ export default function UpdateTransactionItem(props) {
                       id="outlined-select-currency"
                       options={currencies}
                       autoHighlight
-                      defaultValue={currencies.find((x) => x.code.toUpperCase() === transaction.currency.toUpperCase())}
-                      getOptionLabel={(option) => `${option.name} (${option.code})`}
+                      defaultValue={currencies.find((x) => x?.code.toUpperCase() === transaction.currency.toUpperCase())}
+                      getOptionLabel={(option) => option ? `${option.name} (${option.code})`: 'None Selected'}
                       fullWidth
                       onChange={(_, newValue) => {
                         setTransaction({
                           ...transaction,
-                          currency: newValue.code.toUpperCase(),
+                          currency: newValue?.code.toUpperCase() || '',
                         });
                       }}
                       name="currency"
