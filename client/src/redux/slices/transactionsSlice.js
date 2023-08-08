@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from 'uuid'
-import { deleteTransactionAsync, getTransactionsAsync, addTransactionsAsync, updateTransactionAsync } from "../thunks/transactionThunk";
+import { deleteTransactionAsync, getTransactionsAsync, addTransactionsAsync, updateTransactionAsync, getTopCategoriesAsync } from "../thunks/transactionThunk";
 
 
 const DEFAULT_STATE = {
 	//   transactions: data
-	transactions: []
+	transactions: [],
+	topCategories: [],
 };
 
 export const transactionsSlice = createSlice({
@@ -49,6 +50,9 @@ export const transactionsSlice = createSlice({
 				state.transactions = state.transactions.filter((trans) =>
 					trans._id !== action.payload._id
 				);
+			})
+			.addCase(getTopCategoriesAsync.fulfilled, (state, action) => {
+				state.topCategories = action.payload
 			})
 	},
 });

@@ -12,6 +12,7 @@ import { useTransactionCategories } from "../hooks/useTransactionCategories";
 import { useDailyTransactions } from "../hooks/useDailyTransactions";
 import { useDispatch } from "react-redux";
 import { getTransactionsAsync } from "../redux/thunks/transactionThunk";
+import TopTransactionCategories from "../components/Dashboard/TopTransactionCategories";
 /**
  * Component for the dashboard page
  */
@@ -46,6 +47,7 @@ export default function DashBoardPage() {
       
 			<AddGoalItem />
       <GoalsList />
+      <TopTransactionCategories />
     </Container>
   );
 }

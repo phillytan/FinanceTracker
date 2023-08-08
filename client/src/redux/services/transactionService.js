@@ -6,6 +6,12 @@ const getTransactions = async () => {
   return data;
 };
 
+const getTopCategories = async ({startDate, endDate}) => {
+  const data = await fetchHelper(
+    `/transactions/topCategories/${startDate}/${endDate}`, "GET", {});
+  return data;
+};
+
 const addTransactions = async (transactions) => {
   const exchangeRateMap = await getExchangeRatesWithDates(transactions);
   transactions.map((entry) => {
@@ -35,6 +41,6 @@ const deleteTransaction = async (transaction) => {
   return data;
 }
 
-const service = { getTransactions, addTransactions, updateTransaction, deleteTransaction }
+const service = { getTransactions, getTopCategories, addTransactions, updateTransaction, deleteTransaction }
 
 export default service

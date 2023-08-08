@@ -204,7 +204,7 @@ export default function AddTransactionItem() {
                         label="Description"
                         type="text"
                         fullWidth
-                        name="description (optional)"
+                        name="description"
                         onChange={handleChange}
                         variant="standard"
                         sx={{ mb: 2 }}
