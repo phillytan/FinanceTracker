@@ -27,7 +27,7 @@ const SavingsTable = () => {
 				<TableHead>
 					<TableRow>
 						<TableCell>Date</TableCell>
-						<TableCell>Merchant Name</TableCell>
+						<TableCell>Source</TableCell>
 						<TableCell align="right">Amount</TableCell>
 						<TableCell></TableCell>
 					</TableRow>

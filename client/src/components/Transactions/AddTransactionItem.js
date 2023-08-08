@@ -29,7 +29,6 @@ const default_state = {
 
 export default function AddTransactionItem() {
     const [open, setOpen] = React.useState(false);
-    const [openError, setOpenError] = React.useState(false);
     const [transaction, setTransaction] = React.useState(default_state);
     const dispatch = useDispatch();
 
@@ -41,13 +40,8 @@ export default function AddTransactionItem() {
     }
 
     const resetFields = () => {
-        setOpenError(false);
         setOpen(false);
         setTransaction(default_state);
-    }
-
-    const closeErrorMessage = () => {
-        setOpenError(false);
     }
 
     const handleClickOpen = () => {
@@ -58,13 +52,25 @@ export default function AddTransactionItem() {
         let today = new Date();
         let transactionDate = new Date(transaction.date);
         if (transactionDate > today) {
-            setOpenError(true);
-            return;
-        }
-        if (transaction.amount && transaction.date && transaction.transactionType && transaction.currency && transaction.paymentMethod) {
-            dispatch(addTransactionsAsync([transaction]));
-            resetFields();
-        }
+					return global.setNotification("error", "Please ensure the transaction date is no later than today's date.");
+				}
+        if (!transaction.amount) {
+					return global.setNotification("error", "Please enter a transaction amount.");
+				}
+        if (!transaction.date) {
+					return global.setNotification("error", "Please enter a transaction date.");
+				}
+        if (!transaction.transactionType) {
+					return global.setNotification("error", "Please enter a transaction type.");
+				}
+        if (!transaction.currency) {
+					return global.setNotification("error", "Please enter a transaction currency.");
+				}
+        if (!transaction.paymentMethod) {
+					return global.setNotification("error", "Please enter a transaction payment method.");
+				}
+        dispatch(addTransactionsAsync([transaction]));
+        resetFields();
     };
 
     return (
@@ -72,17 +78,6 @@ export default function AddTransactionItem() {
             <Button variant="outlined" onClick={handleClickOpen}>
                 Add Transaction
             </Button>
-            <Dialog open={openError} onClose={closeErrorMessage} maxWidth="md">
-                <DialogTitle>Error</DialogTitle>
-                <DialogContent >
-                    <DialogContentText>
-                        Please ensure the transaction date is no later than today's date.
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={closeErrorMessage}>Continue</Button>
-                </DialogActions>
-            </Dialog>
             <Dialog open={open} onClose={resetFields} maxWidth="md">
                 <DialogTitle>Add Transaction</DialogTitle>
                 <DialogContent >

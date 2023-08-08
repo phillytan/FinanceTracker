@@ -27,7 +27,6 @@ const default_state = {
 
 export default function AddSavingItem() {
     const [open, setOpen] = React.useState(false);
-    const [openError, setOpenError] = React.useState(false);
     const [saving, setSaving] = React.useState(default_state);
     const dispatch = useDispatch();
 
@@ -39,13 +38,8 @@ export default function AddSavingItem() {
     }
 
     const resetFields = () => {
-        setOpenError(false);
         setOpen(false);
         setSaving(default_state);
-    }
-
-    const closeErrorMessage = () => {
-        setOpenError(false);
     }
 
     const handleClickOpen = () => {
@@ -56,13 +50,22 @@ export default function AddSavingItem() {
         let today = new Date();
         let savingDate = new Date(saving.date);
         if (savingDate > today) {
-            setOpenError(true);
-            return;
+          return global.setNotification("error", "Please ensure the saving date is no later than today's date.");
         }
-        if (saving.source && saving.amount && saving.date && saving.currency) {
-            dispatch(addSavingsAsync([saving]));
-            resetFields();
+        if (!saving.source) {
+          return global.setNotification("error", "Please enter a saving source.");
         }
+        if (!saving.amount) {
+          return global.setNotification("error", "Please enter a saving amount.");
+        }
+        if (!saving.date) {
+          return global.setNotification("error", "Please enter a saving date.");
+        }
+        if (!saving.currency) {
+          return global.setNotification("error", "Please enter a saving currency.");
+        }
+        dispatch(addSavingsAsync([saving]));
+        resetFields();
     };
 
     return (
@@ -70,17 +73,6 @@ export default function AddSavingItem() {
             <Button variant="outlined" onClick={handleClickOpen}>
                 Add Saving
             </Button>
-            <Dialog open={openError} onClose={closeErrorMessage} maxWidth="md">
-                <DialogTitle>Error</DialogTitle>
-                <DialogContent >
-                    <DialogContentText>
-                        Please ensure the saving date is no later than today's date.
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={closeErrorMessage}>Continue</Button>
-                </DialogActions>
-            </Dialog>
             <Dialog open={open} onClose={resetFields} maxWidth="md">
                 <DialogTitle>Add Saving</DialogTitle>
                 <DialogContent >

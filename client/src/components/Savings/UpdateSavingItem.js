@@ -39,13 +39,8 @@ export default function UpdateSavingItem(props) {
     }
 
     const resetFields = () => {
-        setOpenError(false);
         setOpen(false);
         setSaving(default_state);
-    }
-
-    const closeErrorMessage = () => {
-        setOpenError(false);
     }
 
     const handleClickOpen = () => {
@@ -57,13 +52,22 @@ export default function UpdateSavingItem(props) {
         let today = new Date();
         let savingDate = new Date(saving.date);
         if (savingDate > today) {
-            setOpenError(true);
-            return;
+          return global.setNotification("error", "Please ensure the saving date is no later than today's date.");
         }
-        if (saving.amount && saving.date && saving.currency) {
-            dispatch(updateSavingAsync(saving))
-            resetFields();
+        if (!saving.source) {
+          return global.setNotification("error", "Please enter a saving source.");
         }
+        if (!saving.amount) {
+          return global.setNotification("error", "Please enter a saving amount.");
+        }
+        if (!saving.date) {
+          return global.setNotification("error", "Please enter a saving date.");
+        }
+        if (!saving.currency) {
+          return global.setNotification("error", "Please enter a saving currency.");
+        }
+        dispatch(updateSavingAsync(saving))
+        resetFields();
     };
     const dateString = saving.date ? getDateString(saving.date) : ''
 
@@ -72,17 +76,6 @@ export default function UpdateSavingItem(props) {
             <Button onClick={handleClickOpen}>
                 Update Saving
             </Button>
-            <Dialog open={openError} onClose={closeErrorMessage} maxWidth="md">
-                <DialogTitle>Error</DialogTitle>
-                <DialogContent >
-                    <DialogContentText>
-                        Please ensure the saving date is no later than today's date.
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={closeErrorMessage}>Continue</Button>
-                </DialogActions>
-            </Dialog>
             <Dialog open={open} onClose={resetFields} maxWidth="md">
                 <DialogTitle>Update Saving</DialogTitle>
                 <DialogContent >
@@ -92,7 +85,7 @@ export default function UpdateSavingItem(props) {
                     <TextField
                         margin="dense"
                         id="source"
-                        label="Merchant Name"
+                        label="Source"
                         value={saving.source}
                         type="text"
                         fullWidth
