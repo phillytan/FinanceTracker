@@ -22,7 +22,7 @@ const default_state = {
     address: '',
     date: '',
     transactionType: '',
-    currency: '',
+    currency: 'CAD',
     paymentMethod: '',
     description: ''
 }

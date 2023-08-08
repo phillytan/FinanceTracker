@@ -12,7 +12,8 @@ import {
     DialogTitle,
     InputLabel,
     MenuItem,
-    TextField
+    TextField,
+    Autocomplete
 } from '@mui/material';
 
 const default_state = {
@@ -20,7 +21,7 @@ const default_state = {
     amount: '',
     address: '',
     date: '',
-    currency: '',
+    currency: 'CAD',
     description: ''
 }
 
@@ -133,23 +134,34 @@ export default function AddSavingItem() {
                         variant="standard"
                         sx={{ mb: 5 }}
                     />
-                    <TextField
-                        id="outlined-select-currency"
-                        select
-                        defaultValue={default_state.currency}
-                        fullWidth
-                        name="currency"
-                        onChange={handleChange}
-                        label="Currency"
-                        helperText="Please select your currency"
-                        sx={{ mb: 2 }}
-                    >
-                        {currencies.map((currency) => (
-                            <MenuItem key={currency} value={currency}>
-                                {currency}
-                            </MenuItem>
-                        ))}
-                    </TextField>
+                    <Autocomplete
+                      id="outlined-select-currency"
+                      options={currencies}
+                      autoHighlight
+                      defaultValue={currencies.find((x) => x?.code === 'cad')}
+                      getOptionLabel={(option) => option ? `${option.name} (${option.code})` : 'None Selected'}
+                      fullWidth
+                      onChange={(_, newValue) => {
+                        setSaving({
+                          ...saving,
+                          currency: newValue?.code.toUpperCase(),
+                        });
+                      }}
+                      name="currency"
+                      sx={{ mb: 2 }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Currency"
+                          helperText="Please select your currency"
+                          fullWidth
+                          inputProps={{
+                            ...params.inputProps,
+                            autoComplete: "new-password",
+                          }}
+                        />
+                      )}
+                    />
                     <TextField
                         margin="dense"
                         id="description"
