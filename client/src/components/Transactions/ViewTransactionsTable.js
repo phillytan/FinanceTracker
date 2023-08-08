@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useSelector, useDispatch } from 'react-redux';
-import TransactionItem from './ViewTransactionsItem';
+import ViewTransactionItem from './ViewTransactionsItem';
 import { getTransactionsAsync } from '../../redux/thunks/transactionThunk';
 import { getDateString } from '../../utils/date';
 import ForeignTransactionIndicator from './ForeignTransactionIndicator';
@@ -56,7 +56,7 @@ const TransactionsTable = () => {
 									)}
 								</TableCell>
 								<TableCell>
-									<TransactionItem item={row}></TransactionItem>
+									<ViewTransactionItem item={row}></ViewTransactionItem>
 								</TableCell>
 							</TableRow>
 						))}
