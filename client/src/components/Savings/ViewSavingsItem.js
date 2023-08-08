@@ -84,7 +84,7 @@ const SavingsItemButton = (props) => {
 
                 <DialogContent dividers>
                     <Typography sx={DialogHeadings}>
-                        Merchant Name:
+                        Source:
                     </Typography>
                     <Typography gutterBottom>
                         {props.item.source}
