@@ -13,7 +13,6 @@ export default function App() {
 
   const styles = {
     summary: {
-      // fontSize: 20,
       width: '-webkit-fill-available',
       margin: '5px 15px 5px 15px',
       fontFamily: '"Roboto","Helvetica","Arial","sans-serif"',
