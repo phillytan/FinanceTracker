@@ -8,7 +8,6 @@ import {
 } from '../thunks/savingThunk'
 
 const DEFAULT_STATE = {
-  //   savings: data
   savings: [],
 }
 
@@ -31,7 +30,6 @@ export const savingsSlice = createSlice({
       )
     },
   },
-  // TODO: Async Reducers placed below here:
   extraReducers: (builder) => {
     builder
       .addCase(getSavingsAsync.fulfilled, (state, action) => {

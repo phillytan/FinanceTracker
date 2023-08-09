@@ -14,7 +14,6 @@ export const usersSlice = createSlice({
   initialState: DEFAULT_STATE,
   reducers: {
     logout: (state) => {
-      // console.log("Logging Out");
       state.accesstoken = null
     },
   },
