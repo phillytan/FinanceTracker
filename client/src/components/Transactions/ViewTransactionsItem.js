@@ -99,11 +99,8 @@ const TransactionsItemButton = (props) => {
           <Typography sx={DialogHeadings}>Currency:</Typography>
           <Typography gutterBottom>{props.item.currency}</Typography>
 
-          {/* todo: payment method is static */}
           <Typography sx={DialogHeadings}>Payment Method:</Typography>
           <Typography gutterBottom>{props.item.paymentMethod}</Typography>
-
-          {/* todo: payment method is static */}
 
           <Typography sx={DialogHeadings}>Notes:</Typography>
           <Typography gutterBottom>{props.item.description}</Typography>
