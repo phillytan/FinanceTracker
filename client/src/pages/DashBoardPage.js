@@ -47,7 +47,7 @@ export default function DashBoardPage() {
             data={categoriesData}
           />
           <Summary />
-          <DashboardEstimatedSpending></DashboardEstimatedSpending>
+          <DashboardEstimatedSpending />
         </Grid>
         <AddGoalItem />
         <GoalsList />
