@@ -5,7 +5,7 @@ import DashboardStackedBarChart from '../components/Dashboard/DashboardGraphs/St
 import DashboardEstimatedSpending from '../components/Dashboard/DashboardGraphs/estimatedSpending'
 import Summary from '../components/Dashboard/Summary'
 import GoalsList from '../components/Dashboard/Goals/ViewGoalsList'
-import {Grid, Card} from '@mui/material'
+import { Grid, Card } from '@mui/material'
 import AddGoalItem from '../components/Dashboard/Goals/AddGoalItem'
 import { useSelector } from 'react-redux'
 import { useTransactionCategories } from '../hooks/useTransactionCategories'

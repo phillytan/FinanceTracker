@@ -69,13 +69,13 @@ const TopTransactionCategories = () => {
         <Typography variant='h5' align='center'>
           Top Spending Categories
         </Typography>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+        <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
           <Select
-            style={{margin:'0 0 5px 10px', padding:'0 0'}}
+            style={{ margin: '0 0 5px 10px', padding: '0 0' }}
             value={timeRange}
             onChange={(event) => setTimeRange(event.target.value)}
           >
-            <MenuItem value='week' >This Week</MenuItem>
+            <MenuItem value='week'>This Week</MenuItem>
             <MenuItem value='month'>This Month</MenuItem>
             <MenuItem value='3months'>Past 3 Months</MenuItem>
             <MenuItem value='year'>Past Year</MenuItem>

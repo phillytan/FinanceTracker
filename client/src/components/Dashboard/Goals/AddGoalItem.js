@@ -50,9 +50,11 @@ export default function AddGoalItem() {
 
   return (
     <div>
-      <Button variant='outlined'
-        style={{margin:'15px 10px'}}
-        onClick={handleClickOpen}>
+      <Button
+        variant='outlined'
+        style={{ margin: '15px 10px' }}
+        onClick={handleClickOpen}
+      >
         Add Goal
       </Button>
       <Dialog open={open} onClose={resetFields} maxWidth='md'>
