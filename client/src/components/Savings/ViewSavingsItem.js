@@ -51,6 +51,8 @@ const SavingsItemButton = (props) => {
     setOpen(false)
   }
 
+  const [dateStr] = props.item.date.split('T')
+
   return (
     <div>
       <Button onClick={handleClickOpen}>More Info</Button>
@@ -89,7 +91,7 @@ const SavingsItemButton = (props) => {
           <Typography gutterBottom>{props.item.address}</Typography>
 
           <Typography sx={DialogHeadings}>Date:</Typography>
-          <Typography gutterBottom>{props.item.date}</Typography>
+          <Typography gutterBottom>{dateStr}</Typography>
           <Typography sx={DialogHeadings}>Currency:</Typography>
           <Typography gutterBottom>{props.item.currency}</Typography>
 

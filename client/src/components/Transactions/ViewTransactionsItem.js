@@ -53,6 +53,8 @@ const TransactionsItemButton = (props) => {
     setOpen(false)
   }
 
+  const [dateStr] = props.item.date.split('T')
+
   return (
     <div>
       <Button onClick={handleClickOpen}>More Info</Button>
@@ -91,7 +93,7 @@ const TransactionsItemButton = (props) => {
           <Typography gutterBottom>{props.item.address}</Typography>
 
           <Typography sx={DialogHeadings}>Date:</Typography>
-          <Typography gutterBottom>{props.item.date}</Typography>
+          <Typography gutterBottom>{dateStr}</Typography>
 
           <Typography sx={DialogHeadings}>Transaction Type:</Typography>
           <Typography gutterBottom>{props.item.transactionType}</Typography>
