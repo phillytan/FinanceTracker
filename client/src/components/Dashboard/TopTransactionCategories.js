@@ -10,7 +10,9 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Container,
+  Grid,
+  Card,
+  FormControl,
   Typography,
   MenuItem,
   Select,
@@ -59,40 +61,47 @@ const TopTransactionCategories = () => {
   }, [timeRange])
 
   return (
-    <Container>
-      <br />
-      <Typography variant='h5' align='center'>
-        Top Spending Categories
-      </Typography>
-      <Select
-        value={timeRange}
-        onChange={(event) => setTimeRange(event.target.value)}
+    <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+      <Card
+        variant={'outlined'}
+        style={{ height: '328px', padding: '20px 0px 0 0', margin: '0px' }}
       >
-        <MenuItem value='week'>This Week</MenuItem>
-        <MenuItem value='month'>This Month</MenuItem>
-        <MenuItem value='3months'>Past 3 Months</MenuItem>
-        <MenuItem value='year'>Past Year</MenuItem>
-        <MenuItem value='all'>All Time</MenuItem>
-      </Select>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell align='center'>Category</TableCell>
-              <TableCell align='center'>Total Amount</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {topCategories.map((category) => (
-              <TableRow key={category._id}>
-                <TableCell align='center'>{category._id}</TableCell>
-                <TableCell align='center'>{category.totalAmount}</TableCell>
+        <Typography variant='h5' align='center'>
+          Top Spending Categories
+        </Typography>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
+          <Select
+            style={{ margin: '0 0 5px 10px', padding: '0 0' }}
+            value={timeRange}
+            onChange={(event) => setTimeRange(event.target.value)}
+          >
+            <MenuItem value='week'>This Week</MenuItem>
+            <MenuItem value='month'>This Month</MenuItem>
+            <MenuItem value='3months'>Past 3 Months</MenuItem>
+            <MenuItem value='year'>Past Year</MenuItem>
+            <MenuItem value='all'>All Time</MenuItem>
+          </Select>
+        </FormControl>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell align='center'>Category</TableCell>
+                <TableCell align='center'>Total Amount</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+            </TableHead>
+            <TableBody>
+              {topCategories.map((category) => (
+                <TableRow key={category._id}>
+                  <TableCell align='center'>{category._id}</TableCell>
+                  <TableCell align='center'>{category.totalAmount}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Card>
+    </Grid>
   )
 }
 

@@ -33,7 +33,11 @@ const GoalsList = () => {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
+      <Table
+        sx={{ minWidth: '-webkit-fill-available', border: 0 }}
+        size='small'
+        aria-label='a dense table'
+      >
         <TableHead>
           <TableRow>
             <TableCell>My Goals</TableCell>
@@ -42,11 +46,14 @@ const GoalsList = () => {
             <TableCell></TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody sx={{ border: 0 }}>
           {rows.map((row) => (
             <TableRow
               key={row._id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{
+                '&:last-child td, &:last-child th': { border: 0 },
+                height: '56px',
+              }}
             >
               <TableCell>{row.goalDetails}</TableCell>
               <TableCell>

@@ -5,7 +5,7 @@ import DashboardStackedBarChart from '../components/Dashboard/DashboardGraphs/St
 import DashboardEstimatedSpending from '../components/Dashboard/DashboardGraphs/estimatedSpending'
 import Summary from '../components/Dashboard/Summary'
 import GoalsList from '../components/Dashboard/Goals/ViewGoalsList'
-import Grid from '@mui/material/Grid'
+import { Grid, Card } from '@mui/material'
 import AddGoalItem from '../components/Dashboard/Goals/AddGoalItem'
 import { useSelector } from 'react-redux'
 import { useTransactionCategories } from '../hooks/useTransactionCategories'
@@ -48,10 +48,20 @@ export default function DashBoardPage() {
           />
           <Summary />
           <DashboardEstimatedSpending />
+          <TopTransactionCategories />
+          <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
+            <Card
+              variant={'outlined'}
+              style={{ height: '328px', padding: '0px', margin: '0px' }}
+            >
+              <AddGoalItem />
+              <GoalsList />
+            </Card>
+          </Grid>
         </Grid>
-        <AddGoalItem />
-        <GoalsList />
-        <TopTransactionCategories />
+        <br />
+        <br />
+        <br />
       </RequireAuthentication>
     </Container>
   )
