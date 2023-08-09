@@ -13,6 +13,7 @@ import { useDailyTransactions } from '../hooks/useDailyTransactions'
 import { useDispatch } from 'react-redux'
 import { getTransactionsAsync } from '../redux/thunks/transactionThunk'
 import TopTransactionCategories from '../components/Dashboard/TopTransactionCategories'
+import RequireAuthentication from '../components/RequireAuthentication'
 /**
  * Component for the dashboard page
  */
@@ -22,6 +23,7 @@ export default function DashBoardPage() {
   useEffect(() => {
     dispatch(getTransactionsAsync())
   }, [dispatch])
+
   const transactions = useSelector((state) => state.transactions.transactions)
   const { categoriesData } = useTransactionCategories(transactions)
   const { dailyTransactions } = useDailyTransactions(transactions)
@@ -34,19 +36,23 @@ export default function DashBoardPage() {
         pb: 2,
       }}
     >
-      <Grid container spacing={2}>
-        <DashboardStackedBarChart
-          title='Daily Transactions'
-          data={dailyTransactions}
-        />
-        <DashboardPieChart title='Spending Categories' data={categoriesData} />
-        <Summary />
-        <DashboardEstimatedSpending></DashboardEstimatedSpending>
-      </Grid>
-
-      <AddGoalItem />
-      <GoalsList />
-      <TopTransactionCategories />
+      <RequireAuthentication>
+        <Grid container spacing={2}>
+          <DashboardStackedBarChart
+            title='Daily Transactions'
+            data={dailyTransactions}
+          />
+          <DashboardPieChart
+            title='Spending Categories'
+            data={categoriesData}
+          />
+          <Summary />
+          <DashboardEstimatedSpending />
+        </Grid>
+        <AddGoalItem />
+        <GoalsList />
+        <TopTransactionCategories />
+      </RequireAuthentication>
     </Container>
   )
 }
