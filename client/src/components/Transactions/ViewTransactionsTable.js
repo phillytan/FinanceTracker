@@ -140,7 +140,7 @@ const TransactionsTable = () => {
                     />
                   )}
                 </TableCell>
-                <TableCell>
+                <TableCell align='right'>
                   <TransactionItem item={row}></TransactionItem>
                 </TableCell>
               </TableRow>
