@@ -1,21 +1,19 @@
 // Reference: https://stackoverflow.com/questions/63236951/how-to-use-material-ui-select-with-react-hook-form
-import React from "react";
+import React from 'react'
 import {
   FormControl,
   InputLabel,
   Select,
   MenuItem,
   FormHelperText,
-} from "@mui/material";
-import { Controller } from "react-hook-form";
+} from '@mui/material'
+import { Controller } from 'react-hook-form'
 
-const FieldSelect = ({ name, label, control, children, fields, ...props }) => {
-  const labelId = `${name}-label`;
+const FieldSelect = ({ name, label, control, fields, ...props }) => {
+  const labelId = `${name}-label`
   return (
     <FormControl {...props}>
-      <InputLabel id={labelId}>
-        {label}
-      </InputLabel>
+      <InputLabel id={labelId}>{label}</InputLabel>
       <Controller
         id={label}
         control={control}
@@ -29,7 +27,7 @@ const FieldSelect = ({ name, label, control, children, fields, ...props }) => {
               {...field}
               {...fieldState}
             >
-              <MenuItem key={`${label}-none`} value="">
+              <MenuItem key={`${label}-none`} value=''>
                 None
               </MenuItem>
               {fields.map((field) => (
@@ -45,6 +43,6 @@ const FieldSelect = ({ name, label, control, children, fields, ...props }) => {
         )}
       />
     </FormControl>
-  );
-};
-export default FieldSelect;
+  )
+}
+export default FieldSelect

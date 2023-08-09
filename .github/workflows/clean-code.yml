@@ -1,0 +1,61 @@
+name: Clean Code Checks
+
+on:
+  pull_request:
+    branches:
+      - "*"
+  push:
+    branches:
+      - main
+
+jobs:
+  eslint:
+    name: eslint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environments: ["client", "server"]
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ matrix.environments }}
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+          cache: "npm"
+          cache-dependency-path: ${{ matrix.environments }}
+      - name: Install NodeJS Dependencies
+        run: npm ci
+      - name: Run eslint
+        run: node_modules/.bin/eslint . --max-warnings 10 --ext .js,.jsx,.ts,.tsx
+  prettier:
+    name: prettier
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environments: ["client", "server"]
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ matrix.environments }}
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: ${{ matrix.environments }}
+      - name: Install NodeJS Dependencies
+        run: npm ci
+      - name: Run prettier
+        run: node_modules/.bin/prettier -c .
