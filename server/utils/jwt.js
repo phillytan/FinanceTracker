@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken')
-const User = require("../model/userModel");
+const User = require('../model/userModel')
 
-const JWT_SECRET = process.env.JWT_SECRET || 'The quick brown fox jumps over the lazy dog.'
+const JWT_SECRET =
+  process.env.JWT_SECRET || 'The quick brown fox jumps over the lazy dog.'
 
 // Helper function to create a JWT session token
 const createJWTSession = (user) => {
-	return {
-		token: jwt.sign({ userId: user.id }, JWT_SECRET, {}),
-	};
-};
+  return {
+    token: jwt.sign({ userId: user.id }, JWT_SECRET, {}),
+  }
+}
 
 // Express Middleware Function to verify JWT session tokens
 const verifyJWTSession = async (req, res, next) => {
@@ -17,7 +18,7 @@ const verifyJWTSession = async (req, res, next) => {
     return res.status(401).send({ message: 'No Access token Specified' })
   }
   try {
-    const { userId } = jwt.verify(accesstoken, JWT_SECRET);
+    const { userId } = jwt.verify(accesstoken, JWT_SECRET)
     const user = await User.findById(userId)
     req.user = user
     next()
@@ -28,6 +29,6 @@ const verifyJWTSession = async (req, res, next) => {
 }
 
 module.exports = {
-	createJWTSession,
-	verifyJWTSession,
-};
+  createJWTSession,
+  verifyJWTSession,
+}
