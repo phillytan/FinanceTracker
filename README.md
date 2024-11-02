@@ -52,6 +52,8 @@ Chinchin: A main feature that Chinchin worked on was the bulk uploading function
 
 Valery: Valery worked mostly on implementing the stretch goal to predict future spendings, which included a lot of researching and learning ways to forecast a time series: after tuning the parameters to create a model that suits the project’s scope and requirements, she also used said model to show forecasted spendings on the dashboard. She generated about a hundred dummy data points using the help of online tools such as chatGPT, which she then cleaned, transformed and formatted so that a dummy test account could be used to aid in testing the functionality of the other tasks. She also helped set up tools such as task boards to help facilitate the team’s progress tracking. 
 
+## Accessing the Application
+This project has been deployed and can be accessed via the following link: https://financetracker-htyc.onrender.com/
 
 ## Prototypes
 ### Dashboard Prototype
